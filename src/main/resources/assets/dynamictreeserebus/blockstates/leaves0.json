@@ -7,7 +7,7 @@
 	},
 	"variants": {
 		"tree": {
-			"0": {},
+			"0": { "textures": { "all": "erebus:blocks/leaves_asper" } },
 			"1": {},
 			"2": {},
 			"3": {}

@@ -1,0 +1,7 @@
+{
+  "parent": "dynamictrees:block/smartmodel/branch",
+  "textures": {
+    "bark": "erebus:blocks/log_asper",
+    "rings": "erebus:blocks/log_asper_top"
+  }
+}

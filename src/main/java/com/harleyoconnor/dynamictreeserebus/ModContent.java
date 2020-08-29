@@ -1,6 +1,7 @@
 package com.harleyoconnor.dynamictreeserebus;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.ferreusveritas.dynamictrees.ModItems;
 import com.ferreusveritas.dynamictrees.ModRecipes;
@@ -13,6 +14,7 @@ import com.ferreusveritas.dynamictrees.items.DendroPotion.DendroPotionType;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 
+import com.harleyoconnor.dynamictreeserebus.trees.TreeAsper;
 import com.harleyoconnor.dynamictreeserebus.worldgen.BiomeDataBasePopulator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -36,6 +38,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 @ObjectHolder(DynamicTreesErebus.MODID)
 public class ModContent {
 
+	public static ILeavesProperties asperLeavesProperties;
+
 	public static ArrayList<TreeFamily> trees = new ArrayList<TreeFamily>();
 
 	@SubscribeEvent
@@ -46,6 +50,13 @@ public class ModContent {
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> registry = event.getRegistry();
+
+		asperLeavesProperties = setUpLeaves(TreeAsper.primitiveLeaves, "conifer");
+
+		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 0, asperLeavesProperties);
+
+		TreeFamily asperTree = new TreeAsper();
+		Collections.addAll(trees, asperTree);
 
 		trees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
 		ArrayList<Block> treeBlocks = new ArrayList<>();
