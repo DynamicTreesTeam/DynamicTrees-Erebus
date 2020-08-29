@@ -9,7 +9,7 @@
 		"tree": {
 			"0": { "textures": { "all": "erebus:blocks/leaves_asper" } },
 			"1": { "textures": { "all": "erebus:blocks/leaves_mossbark" } },
-			"2": {},
+			"2": { "textures": { "all": "erebus:blocks/leaves_cypress" } },
 			"3": {}
 		},
 		"hydro": {

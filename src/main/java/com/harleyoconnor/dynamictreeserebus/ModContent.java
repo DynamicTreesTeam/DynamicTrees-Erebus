@@ -15,6 +15,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 
 import com.harleyoconnor.dynamictreeserebus.trees.TreeAsper;
+import com.harleyoconnor.dynamictreeserebus.trees.TreeCypress;
 import com.harleyoconnor.dynamictreeserebus.trees.TreeMossbark;
 import com.harleyoconnor.dynamictreeserebus.worldgen.BiomeDataBasePopulator;
 import net.minecraft.block.Block;
@@ -39,7 +40,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @ObjectHolder(DynamicTreesErebus.MODID)
 public class ModContent {
 
-	public static ILeavesProperties asperLeavesProperties, mossbarkLeavesProperties;
+	public static ILeavesProperties asperLeavesProperties, mossbarkLeavesProperties, cypressLeavesProperties;
 
 	public static ArrayList<TreeFamily> trees = new ArrayList<TreeFamily>();
 
@@ -54,13 +55,16 @@ public class ModContent {
 
 		asperLeavesProperties = setUpLeaves(TreeAsper.primitiveLeaves, "conifer");
 		mossbarkLeavesProperties = setUpLeaves(TreeMossbark.primitiveLeaves, "conifer");
+		cypressLeavesProperties = setUpLeaves(TreeCypress.primitiveLeaves, "conifer");
 
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 0, asperLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 1, mossbarkLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 2, cypressLeavesProperties);
 
 		TreeFamily asperTree = new TreeAsper();
 		TreeFamily mossbarkTree = new TreeMossbark();
-		Collections.addAll(trees, asperTree, mossbarkTree);
+		TreeFamily cypressTree = new TreeCypress();
+		Collections.addAll(trees, asperTree, mossbarkTree, cypressTree);
 
 		trees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
 		ArrayList<Block> treeBlocks = new ArrayList<>();
@@ -100,6 +104,7 @@ public class ModContent {
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 		setUpSeedRecipes("asper", new ItemStack(Block.getBlockFromName("erebus:sapling_asper"), 1, 0));
 		setUpSeedRecipes("mossbark", new ItemStack(Block.getBlockFromName("erebus:sapling_mossbark"), 1, 0));
+		setUpSeedRecipes("cypress", new ItemStack(Block.getBlockFromName("erebus:sapling_cypress"), 1, 0));
 	}
 
 	public static void setUpSeedRecipes (String name, ItemStack treeSapling){
