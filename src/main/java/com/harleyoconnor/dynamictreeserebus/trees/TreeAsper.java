@@ -1,5 +1,6 @@
 package com.harleyoconnor.dynamictreeserebus.trees;
 
+import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
@@ -7,6 +8,11 @@ import com.harleyoconnor.dynamictreeserebus.ModContent;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 public class TreeAsper extends TreeFamily {
 
@@ -21,9 +27,22 @@ public class TreeAsper extends TreeFamily {
             // Set growing parameters.
             this.setBasicGrowingParameters(0.1f, 10.0f, 1, 1, 0.4f);
 
+            // Add extra Asper logs to drops, otherwise it only drops sticks.
+            this.addDropCreator(new DropCreator(new ResourceLocation(DynamicTreesErebus.MODID, "extraasper")) {
+                public List<ItemStack> getLogsDrop(World world, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, float volume) {
+                    volume *= 6;
+                    dropList.add(new ItemStack(primitiveLog, getRandomNumber(1, (int) (volume <= 1 ? 1 : volume) * 2), 0));
+                    return dropList;
+                }
+            });
+
             // Setup seeds.
             this.generateSeed();
             this.setupStandardSeedDropping();
+        }
+
+        private int getRandomNumber (int min, int max) {
+            return new Random().nextInt((max + 1) - min) + min;
         }
 
     }
@@ -45,11 +64,6 @@ public class TreeAsper extends TreeFamily {
     @Override
     public boolean autoCreateBranch() {
         return true;
-    }
-
-    @Override
-    public ItemStack getPrimitiveLogItemStack(int qty) {
-        return new ItemStack(primitiveLog, qty, 0);
     }
 
 }
