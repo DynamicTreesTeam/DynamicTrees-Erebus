@@ -8,18 +8,18 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class TreeAsper extends TreeFamily {
+public class TreeMossbark extends TreeFamily {
 
-    public static final Block primitiveLog = Block.getBlockFromName("erebus:log_asper");
-    public static final Block primitiveLeaves = Block.getBlockFromName("erebus:leaves_asper");
+    public static final Block primitiveLog = Block.getBlockFromName("erebus:log_mossbark");
+    public static final Block primitiveLeaves = Block.getBlockFromName("erebus:leaves_mossbark");
 
-    public static final class SpeciesAsper extends Species {
+    public static final class SpeciesMossbark extends Species {
 
-        public SpeciesAsper(TreeFamily treeFamily) {
-            super(treeFamily.getName(), treeFamily, ModContent.asperLeavesProperties);
+        public SpeciesMossbark(TreeFamily treeFamily) {
+            super(treeFamily.getName(), treeFamily, ModContent.mossbarkLeavesProperties);
 
             // Set growing parameters.
-            this.setBasicGrowingParameters(0.1f, 10.0f, 1, 1, 0.4f);
+            this.setBasicGrowingParameters(0.3f, 14.0f, 4, 7, 0.9f);
 
             // Setup seeds.
             this.generateSeed();
@@ -28,18 +28,18 @@ public class TreeAsper extends TreeFamily {
 
     }
 
-    public TreeAsper() {
-        super(new ResourceLocation(DynamicTreesErebus.MODID, "asper"));
+    public TreeMossbark() {
+        super(new ResourceLocation(DynamicTreesErebus.MODID, "mossbark"));
 
         this.setPrimitiveLog(primitiveLog.getDefaultState(), new ItemStack(primitiveLog, 1, 0));
-        ModContent.asperLeavesProperties.setTree(this);
+        ModContent.mossbarkLeavesProperties.setTree(this);
 
         this.addConnectableVanillaLeaves(((state) -> state.getBlock() == primitiveLeaves));
     }
 
     @Override
     public void createSpecies() {
-        this.setCommonSpecies(new SpeciesAsper(this));
+        this.setCommonSpecies(new SpeciesMossbark(this));
     }
 
     @Override

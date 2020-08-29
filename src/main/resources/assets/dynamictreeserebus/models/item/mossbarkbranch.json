@@ -1,0 +1,7 @@
+{
+  "parent": "dynamictrees:item/branch",
+  "textures": {
+    "bark": "erebus:blocks/log_mossbark",
+    "rings": "erebus:blocks/log_mossbark_top"
+  }
+}

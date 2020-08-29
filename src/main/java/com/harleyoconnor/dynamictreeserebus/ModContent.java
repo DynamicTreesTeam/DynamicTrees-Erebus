@@ -15,6 +15,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 
 import com.harleyoconnor.dynamictreeserebus.trees.TreeAsper;
+import com.harleyoconnor.dynamictreeserebus.trees.TreeMossbark;
 import com.harleyoconnor.dynamictreeserebus.worldgen.BiomeDataBasePopulator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -38,7 +39,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @ObjectHolder(DynamicTreesErebus.MODID)
 public class ModContent {
 
-	public static ILeavesProperties asperLeavesProperties;
+	public static ILeavesProperties asperLeavesProperties, mossbarkLeavesProperties;
 
 	public static ArrayList<TreeFamily> trees = new ArrayList<TreeFamily>();
 
@@ -52,11 +53,14 @@ public class ModContent {
 		IForgeRegistry<Block> registry = event.getRegistry();
 
 		asperLeavesProperties = setUpLeaves(TreeAsper.primitiveLeaves, "conifer");
+		mossbarkLeavesProperties = setUpLeaves(TreeMossbark.primitiveLeaves, "conifer");
 
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 0, asperLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 1, mossbarkLeavesProperties);
 
 		TreeFamily asperTree = new TreeAsper();
-		Collections.addAll(trees, asperTree);
+		TreeFamily mossbarkTree = new TreeMossbark();
+		Collections.addAll(trees, asperTree, mossbarkTree);
 
 		trees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
 		ArrayList<Block> treeBlocks = new ArrayList<>();
@@ -94,8 +98,10 @@ public class ModContent {
 
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-
+		setUpSeedRecipes("asper", new ItemStack(Block.getBlockFromName("erebus:sapling_asper"), 1, 0));
+		setUpSeedRecipes("mossbark", new ItemStack(Block.getBlockFromName("erebus:sapling_mossbark"), 1, 0));
 	}
+
 	public static void setUpSeedRecipes (String name, ItemStack treeSapling){
 		Species treeSpecies = TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesErebus.MODID, name));
 		ItemStack treeSeed = treeSpecies.getSeedStack(1);

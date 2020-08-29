@@ -8,7 +8,7 @@
 	"variants": {
 		"tree": {
 			"0": { "textures": { "all": "erebus:blocks/leaves_asper" } },
-			"1": {},
+			"1": { "textures": { "all": "erebus:blocks/leaves_mossbark" } },
 			"2": {},
 			"3": {}
 		},
