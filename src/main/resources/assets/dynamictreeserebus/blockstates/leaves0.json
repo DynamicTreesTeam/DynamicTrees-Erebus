@@ -10,7 +10,7 @@
 			"0": { "textures": { "all": "erebus:blocks/leaves_asper" } },
 			"1": { "textures": { "all": "erebus:blocks/leaves_mossbark" } },
 			"2": { "textures": { "all": "erebus:blocks/leaves_cypress" } },
-			"3": {}
+			"3": { "textures": { "all": "erebus:blocks/leaves_mahogany" } }
 		},
 		"hydro": {
 			"1": {},

@@ -2,8 +2,11 @@
 tile.dynamictreeserebus:asperbranch.name=Dynamic Asper Tree
 tile.dynamictreeserebus:mossbarkbranch.name=Dynamic Mossbark Tree
 tile.dynamictreeserebus:cypressbranch.name=Dynamic Cypress Tree
+tile.dynamictreeserebus:mahoganybranch.name=Dynamic Mahogany Tree
+tile.dynamictreeserebus:mahoganybranchx.name=Thick Dynamic Mahogany Tree
 
 # Items
 item.dynamictreeserebus:asperseed.name=Asper Seed
 item.dynamictreeserebus:mossbarkseed.name=Mossbark Seed
 item.dynamictreeserebus:cypressseed.name=Cypress Seed
+item.dynamictreeserebus:mahoganyseed.name=Mahogany Seed

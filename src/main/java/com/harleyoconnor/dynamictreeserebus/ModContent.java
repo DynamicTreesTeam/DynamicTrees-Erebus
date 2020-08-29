@@ -16,6 +16,7 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 
 import com.harleyoconnor.dynamictreeserebus.trees.TreeAsper;
 import com.harleyoconnor.dynamictreeserebus.trees.TreeCypress;
+import com.harleyoconnor.dynamictreeserebus.trees.TreeMahogany;
 import com.harleyoconnor.dynamictreeserebus.trees.TreeMossbark;
 import com.harleyoconnor.dynamictreeserebus.worldgen.BiomeDataBasePopulator;
 import net.minecraft.block.Block;
@@ -40,7 +41,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @ObjectHolder(DynamicTreesErebus.MODID)
 public class ModContent {
 
-	public static ILeavesProperties asperLeavesProperties, mossbarkLeavesProperties, cypressLeavesProperties;
+	public static ILeavesProperties asperLeavesProperties, mossbarkLeavesProperties, cypressLeavesProperties, mahoganyLeavesProperties;
 
 	public static ArrayList<TreeFamily> trees = new ArrayList<TreeFamily>();
 
@@ -56,15 +57,18 @@ public class ModContent {
 		asperLeavesProperties = setUpLeaves(TreeAsper.primitiveLeaves, "conifer");
 		mossbarkLeavesProperties = setUpLeaves(TreeMossbark.primitiveLeaves, "conifer");
 		cypressLeavesProperties = setUpLeaves(TreeCypress.primitiveLeaves, "conifer");
+		mahoganyLeavesProperties = setUpLeaves(TreeMahogany.primitiveLeaves, "deciduous");
 
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 0, asperLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 1, mossbarkLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 2, cypressLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 3, mahoganyLeavesProperties);
 
 		TreeFamily asperTree = new TreeAsper();
 		TreeFamily mossbarkTree = new TreeMossbark();
 		TreeFamily cypressTree = new TreeCypress();
-		Collections.addAll(trees, asperTree, mossbarkTree, cypressTree);
+		TreeFamily mahoganyTree = new TreeMahogany();
+		Collections.addAll(trees, asperTree, mossbarkTree, cypressTree, mahoganyTree);
 
 		trees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
 		ArrayList<Block> treeBlocks = new ArrayList<>();
@@ -105,6 +109,7 @@ public class ModContent {
 		setUpSeedRecipes("asper", new ItemStack(Block.getBlockFromName("erebus:sapling_asper"), 1, 0));
 		setUpSeedRecipes("mossbark", new ItemStack(Block.getBlockFromName("erebus:sapling_mossbark"), 1, 0));
 		setUpSeedRecipes("cypress", new ItemStack(Block.getBlockFromName("erebus:sapling_cypress"), 1, 0));
+		setUpSeedRecipes("mahogany", new ItemStack(Block.getBlockFromName("erebus:sapling_mahogany"), 1, 0));
 	}
 
 	public static void setUpSeedRecipes (String name, ItemStack treeSapling){
