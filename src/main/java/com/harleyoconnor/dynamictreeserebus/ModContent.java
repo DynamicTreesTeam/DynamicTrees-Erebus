@@ -38,7 +38,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @ObjectHolder(DynamicTreesErebus.MODID)
 public class ModContent {
 
-	public static ILeavesProperties asperLeavesProperties, mossbarkLeavesProperties, cypressLeavesProperties, mahoganyLeavesProperties, eucalyptusLeavesProperties;
+	public static ILeavesProperties asperLeavesProperties, mossbarkLeavesProperties, cypressLeavesProperties, mahoganyLeavesProperties, eucalyptusLeavesProperties, balsamLeavesProperties;
 
 	public static ArrayList<TreeFamily> trees = new ArrayList<TreeFamily>();
 
@@ -56,19 +56,22 @@ public class ModContent {
 		cypressLeavesProperties = setUpLeaves(TreeCypress.primitiveLeaves, "conifer");
 		mahoganyLeavesProperties = setUpLeaves(TreeMahogany.primitiveLeaves, "deciduous");
 		eucalyptusLeavesProperties = setUpLeaves(TreeEucalyptus.primitiveLeaves, "deciduous");
+		balsamLeavesProperties = setUpLeaves(TreeBalsam.primitiveLeaves, "deciduous");
 
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 0, asperLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 1, mossbarkLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 2, cypressLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 3, mahoganyLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 4, eucalyptusLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 5, balsamLeavesProperties);
 
 		TreeFamily asperTree = new TreeAsper();
 		TreeFamily mossbarkTree = new TreeMossbark();
 		TreeFamily cypressTree = new TreeCypress();
 		TreeFamily mahoganyTree = new TreeMahogany();
 		TreeFamily eucalyptusTree = new TreeEucalyptus();
-		Collections.addAll(trees, asperTree, mossbarkTree, cypressTree, mahoganyTree, eucalyptusTree);
+		TreeFamily balsamTree = new TreeBalsam();
+		Collections.addAll(trees, asperTree, mossbarkTree, cypressTree, mahoganyTree, eucalyptusTree, balsamTree);
 
 		trees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
 		ArrayList<Block> treeBlocks = new ArrayList<>();
@@ -111,6 +114,7 @@ public class ModContent {
 		setUpSeedRecipes("cypress", new ItemStack(Block.getBlockFromName("erebus:sapling_cypress"), 1, 0));
 		setUpSeedRecipes("mahogany", new ItemStack(Block.getBlockFromName("erebus:sapling_mahogany"), 1, 0));
 		setUpSeedRecipes("eucalyptus", new ItemStack(Block.getBlockFromName("erebus:sapling_eucalyptus"), 1, 0));
+		setUpSeedRecipes("balsam", new ItemStack(Block.getBlockFromName("erebus:sapling_balsam"), 1, 0));
 	}
 
 	public static void setUpSeedRecipes (String name, ItemStack treeSapling){
