@@ -1,0 +1,8 @@
+{
+  "parent": "dynamictrees:block/sapling",
+  "textures": {
+    "particle": "erebus:blocks/leaves_eucalyptus",
+    "log": "erebus:blocks/log_eucalyptus",
+    "leaves": "erebus:blocks/leaves_eucalyptus"
+  }
+}
