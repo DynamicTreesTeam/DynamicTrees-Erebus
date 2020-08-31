@@ -53,9 +53,9 @@ public class ModContent {
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> registry = event.getRegistry();
 
-		asperLeavesProperties = setUpLeaves(TreeAsper.primitiveLeaves, "asper");
+		asperLeavesProperties = setUpLeaves(TreeAsper.primitiveLeaves, "dynamictreeserebus:asper");
 		mossbarkLeavesProperties = setUpLeaves(TreeMossbark.primitiveLeaves, "conifer");
-		cypressLeavesProperties = setUpLeaves(TreeCypress.primitiveLeaves, "conifer");
+		cypressLeavesProperties = setUpLeaves(TreeCypress.primitiveLeaves, "dynamictreeserebus:cypress");
 		mahoganyLeavesProperties = setUpLeaves(TreeMahogany.primitiveLeaves, "deciduous");
 		eucalyptusLeavesProperties = setUpLeaves(TreeEucalyptus.primitiveLeaves, "acacia");
 		balsamLeavesProperties = setUpLeaves(TreeBalsam.primitiveLeaves, "deciduous");

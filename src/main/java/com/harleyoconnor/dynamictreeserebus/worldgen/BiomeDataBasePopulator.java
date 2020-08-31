@@ -18,7 +18,8 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
             ModBiomes.SUBMERGED_SWAMP, // Marshwood trees spawn here, but are not currently dynamic due to them being extremely large.
             ModBiomes.SUBTERRANEAN_SAVANNAH, // Acacia trees, giant baobab (not dynamic), and asper trees spawn here.
             ModBiomes.ULTERIOR_OUTBACK, // Eucalyptus, acacia, and balsam trees spawn here.
-            ModBiomes.UNDERGROUND_JUNGLE, //
+            ModBiomes.UNDERGROUND_JUNGLE, // Jungle, Asper, Eucalyptus, Mossbark, and Mahogany trees spawn here.
+            ModBiomes.VOLCANIC_DESERT // No trees, but scorched wood could eventually be added.
     };
 
     public void populate(BiomeDataBase dbase) {
