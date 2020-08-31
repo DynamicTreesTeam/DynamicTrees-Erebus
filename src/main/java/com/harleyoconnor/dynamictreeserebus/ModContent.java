@@ -38,6 +38,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 @ObjectHolder(DynamicTreesErebus.MODID)
 public class ModContent {
 
+	public static BlockSurfaceRoot asperRoot;
+
 	public static ILeavesProperties asperLeavesProperties, mossbarkLeavesProperties, cypressLeavesProperties, mahoganyLeavesProperties, eucalyptusLeavesProperties, balsamLeavesProperties;
 
 	public static ArrayList<TreeFamily> trees = new ArrayList<TreeFamily>();
@@ -51,11 +53,11 @@ public class ModContent {
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> registry = event.getRegistry();
 
-		asperLeavesProperties = setUpLeaves(TreeAsper.primitiveLeaves, "conifer");
+		asperLeavesProperties = setUpLeaves(TreeAsper.primitiveLeaves, "asper");
 		mossbarkLeavesProperties = setUpLeaves(TreeMossbark.primitiveLeaves, "conifer");
 		cypressLeavesProperties = setUpLeaves(TreeCypress.primitiveLeaves, "conifer");
 		mahoganyLeavesProperties = setUpLeaves(TreeMahogany.primitiveLeaves, "deciduous");
-		eucalyptusLeavesProperties = setUpLeaves(TreeEucalyptus.primitiveLeaves, "deciduous");
+		eucalyptusLeavesProperties = setUpLeaves(TreeEucalyptus.primitiveLeaves, "acacia");
 		balsamLeavesProperties = setUpLeaves(TreeBalsam.primitiveLeaves, "deciduous");
 
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 0, asperLeavesProperties);

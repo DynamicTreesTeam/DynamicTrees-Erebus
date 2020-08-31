@@ -32,6 +32,7 @@ public class TreeBalsam extends TreeFamily {
 
             // Add resin drop creator.
             this.addDropCreator(new DropCreator(new ResourceLocation(DynamicTreesErebus.MODID, "extraasper")) {
+                @Override
                 public List<ItemStack> getLogsDrop(World world, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, float volume) {
                     if (volume >= 1) dropList.add(new ItemStack(Item.getByNameOrId("erebus:materials"), getRandomNumber((int) volume, (int) (volume) * 3), 40));
                     return dropList;

@@ -1,5 +1,6 @@
 # Blocks
 tile.dynamictreeserebus:asperbranch.name=Dynamic Asper Tree
+tile.dynamictreeserebus:asperroot.name=Dynamic Asper Root
 tile.dynamictreeserebus:mossbarkbranch.name=Dynamic Mossbark Tree
 tile.dynamictreeserebus:cypressbranch.name=Dynamic Cypress Tree
 tile.dynamictreeserebus:mahoganybranch.name=Dynamic Mahogany Tree
@@ -12,5 +13,5 @@ item.dynamictreeserebus:asperseed.name=Asper Seed
 item.dynamictreeserebus:mossbarkseed.name=Mossbark Seed
 item.dynamictreeserebus:cypressseed.name=Cypress Seed
 item.dynamictreeserebus:mahoganyseed.name=Mahogany Seed
-item.dynamictreeserebus:eucalyptusseed.name=Eucalyptus Seed
+item.dynamictreeserebus:eucalyptusseed.name=Eucalyptus Capsule
 item.dynamictreeserebus:balsamseed.name=Balsam Seed

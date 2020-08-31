@@ -30,8 +30,8 @@ public class TreeMahogany extends TreeFamily {
             // Setup environment factors.
             this.envFactor(BiomeDictionary.Type.COLD, 0.15F);
             this.envFactor(BiomeDictionary.Type.DRY, 0.2F);
-            this.envFactor(BiomeDictionary.Type.HOT, 1.1F);
-            this.envFactor(BiomeDictionary.Type.WET, 1.1F);
+            this.envFactor(BiomeDictionary.Type.HOT, 1.2F);
+            this.envFactor(BiomeDictionary.Type.WET, 1.2F);
 
             this.setSoilLongevity(16);
 
