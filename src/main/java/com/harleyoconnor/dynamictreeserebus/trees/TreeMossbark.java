@@ -1,5 +1,6 @@
 package com.harleyoconnor.dynamictreeserebus.trees;
 
+import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
@@ -7,6 +8,8 @@ import com.harleyoconnor.dynamictreeserebus.ModContent;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class TreeMossbark extends TreeFamily {
 
@@ -26,6 +29,10 @@ public class TreeMossbark extends TreeFamily {
             this.setupStandardSeedDropping();
         }
 
+        @Override
+        protected int[] customDirectionManipulation(World world, BlockPos pos, int radius, GrowSignal signal, int[] probMap) {
+            return super.customDirectionManipulation(world, pos, radius, signal, probMap);
+        }
     }
 
     public TreeMossbark() {

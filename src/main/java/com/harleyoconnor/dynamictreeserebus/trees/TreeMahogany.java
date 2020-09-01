@@ -25,6 +25,7 @@ public class TreeMahogany extends TreeFamily {
             // Set growing parameters.
             this.setBasicGrowingParameters(0.25F, 24.0F, 7, 5, 0.9F);
 
+            // Give it the jungle growth logic.
             this.setGrowthLogicKit(TreeRegistry.findGrowthLogicKit("jungle"));
 
             // Setup environment factors.
@@ -33,6 +34,7 @@ public class TreeMahogany extends TreeFamily {
             this.envFactor(BiomeDictionary.Type.HOT, 1.2F);
             this.envFactor(BiomeDictionary.Type.WET, 1.2F);
 
+            // Set soil to last longer.
             this.setSoilLongevity(16);
 
             // Setup seeds.

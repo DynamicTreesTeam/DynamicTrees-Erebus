@@ -48,15 +48,18 @@ public class TreeBalsam extends TreeFamily {
 
         @Override
         protected int[] customDirectionManipulation(World world, BlockPos pos, int radius, GrowSignal signal, int[] probMap) {
-            for (EnumFacing dir : EnumFacing.VALUES) probMap[dir.getIndex()] = 0;
+            for (EnumFacing dir : EnumFacing.VALUES) probMap[dir.getIndex()] = 0; // Reset values.
 
-            final int currentHeight = pos.getY() - signal.rootPos.getY();
+            final int currentHeight = pos.getY() - signal.rootPos.getY(); // Get height up tree.
+            probMap[EnumFacing.DOWN.getIndex()] = 0; // Disallow growing downwards.
 
-            if (currentHeight > this.lowestBranchHeight) for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] = (getRandomNumber(1, 100) == 1) ? (int) signal.energy * 2 : 0;
+            // Make chance of branching off if at the right height.
+            if (currentHeight >= this.lowestBranchHeight) for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] = (getRandomNumber(1, 100) == 1) ? (int) signal.energy * 2 : 0;
 
+            // Allow branching off an extra block.
             if (!signal.isInTrunk()) if (signal.numTurns == 1 && signal.delta.getX() < 2 && signal.delta.getZ() < 2) probMap[signal.dir.getIndex()] = (int) signal.energy * 3;
 
-            probMap[signal.dir.getOpposite().getIndex()] = 0;
+            probMap[signal.dir.getOpposite().getIndex()] = 0; // Disable the direction we came from.
 
             return probMap;
         }
