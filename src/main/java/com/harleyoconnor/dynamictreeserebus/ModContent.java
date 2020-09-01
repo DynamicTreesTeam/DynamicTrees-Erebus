@@ -58,7 +58,7 @@ public class ModContent {
 		cypressLeavesProperties = setUpLeaves(TreeCypress.primitiveLeaves, "dynamictreeserebus:cypress");
 		mahoganyLeavesProperties = setUpLeaves(TreeMahogany.primitiveLeaves, "deciduous");
 		eucalyptusLeavesProperties = setUpLeaves(TreeEucalyptus.primitiveLeaves, "acacia");
-		balsamLeavesProperties = setUpLeaves(TreeBalsam.primitiveLeaves, "deciduous");
+		balsamLeavesProperties = setUpLeaves(TreeBalsam.primitiveLeaves, "acacia");
 
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 0, asperLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 1, mossbarkLeavesProperties);

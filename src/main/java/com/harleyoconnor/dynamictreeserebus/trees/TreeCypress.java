@@ -26,7 +26,7 @@ public class TreeCypress extends TreeFamily {
             super(treeFamily.getName(), treeFamily, ModContent.cypressLeavesProperties);
 
             // Set growing parameters.
-            setBasicGrowingParameters(0.1f, 18.0f, 30, 2, 1.1f);
+            setBasicGrowingParameters(0.1f, 20.0f, 30, 2, 1.1f);
 
             // Setup seeds.
             this.generateSeed();

@@ -1,5 +1,6 @@
 package com.harleyoconnor.dynamictreeserebus.trees;
 
+import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
@@ -9,6 +10,7 @@ import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -28,10 +30,10 @@ public class TreeBalsam extends TreeFamily {
             super(treeFamily.getName(), treeFamily, ModContent.balsamLeavesProperties);
 
             // Set growing parameters.
-            this.setBasicGrowingParameters(0.4F, 18.0F, 5, 7, 1.0F);
+            this.setBasicGrowingParameters(0.4F, 18.0F, 5, 5, 1.0F);
 
             // Add resin drop creator.
-            this.addDropCreator(new DropCreator(new ResourceLocation(DynamicTreesErebus.MODID, "extraasper")) {
+            this.addDropCreator(new DropCreator(new ResourceLocation(DynamicTreesErebus.MODID, "resin")) {
                 @Override
                 public List<ItemStack> getLogsDrop(World world, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, float volume) {
                     if (volume >= 1) dropList.add(new ItemStack(Item.getByNameOrId("erebus:materials"), getRandomNumber((int) volume, (int) (volume) * 3), 40));
@@ -42,6 +44,21 @@ public class TreeBalsam extends TreeFamily {
             // Setup seeds.
             this.generateSeed();
             this.setupStandardSeedDropping();
+        }
+
+        @Override
+        protected int[] customDirectionManipulation(World world, BlockPos pos, int radius, GrowSignal signal, int[] probMap) {
+            for (EnumFacing dir : EnumFacing.VALUES) probMap[dir.getIndex()] = 0;
+
+            final int currentHeight = pos.getY() - signal.rootPos.getY();
+
+            if (currentHeight > this.lowestBranchHeight) for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] = (getRandomNumber(1, 100) == 1) ? (int) signal.energy * 2 : 0;
+
+            if (!signal.isInTrunk()) if (signal.numTurns == 1 && signal.delta.getX() < 2 && signal.delta.getZ() < 2) probMap[signal.dir.getIndex()] = (int) signal.energy * 3;
+
+            probMap[signal.dir.getOpposite().getIndex()] = 0;
+
+            return probMap;
         }
 
         private int getRandomNumber (int min, int max) {
