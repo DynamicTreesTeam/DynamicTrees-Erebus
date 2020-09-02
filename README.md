@@ -10,7 +10,7 @@ Dynamic Trees compatibility add-on for The Erebus. This project has not yet been
 - Balsam
 
 ## Unsupported Trees
-The following trees are too large to be made dynamic and so will not be added.
+The following trees are too large to be made dynamic and so will not be added. 
 
 - Baobab
 - Marshwood
