@@ -39,7 +39,7 @@ dependencies {
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
 
-    compile files("libs/DynamicTrees-1.12.2-0.9.8.jar")
+    compile files("libs/DynamicTrees-1.12.2-0.9.9.jar")
     compile files("libs/Erebus-1.0.31")
       
     // real examples
