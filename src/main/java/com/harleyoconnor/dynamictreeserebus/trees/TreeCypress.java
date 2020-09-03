@@ -6,6 +6,7 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.ModContent;
+import com.harleyoconnor.dynamictreeserebus.util.NumberUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -37,15 +38,15 @@ public class TreeCypress extends TreeFamily {
         protected int[] customDirectionManipulation(World world, BlockPos pos, int radius, GrowSignal signal, int probMap[]) {
             probMap = super.customDirectionManipulation(world, pos, radius, signal, probMap); // Get default prob map.
 
-            final int currentHeight = pos.getY() - signal.rootPos.getY(); // Get height up tree.
+            final int signalHeight = (pos.getY() - signal.rootPos.getY()); // Get height of signal.
             probMap[EnumFacing.DOWN.getIndex()] = 0; // Disallow growing downwards.
 
             // Allow chance of branching off.
-            for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] = getRandomNumber(1, 15) == 1 ? 100 : 0;
+            for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] = NumberUtils.getRandomIntBetween(1, 15) == 1 ? 100 : 0;
 
             if (signal.numTurns > 0) {
                 // Allow branches to grow further.
-                if (signal.numTurns >= 2 && currentHeight > 8 && getRandomNumber(1, 6) != 1) for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] = 0;
+                if (signal.numTurns >= 2 && signalHeight > 8 && NumberUtils.getRandomIntBetween(1, 6) != 1) for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] = 0;
                 probMap[EnumFacing.UP.getIndex()] = 0;
             }
 
@@ -60,10 +61,6 @@ public class TreeCypress extends TreeFamily {
             int month = (int) day / 30; // Change the hashs every in-game month
 
             return super.getEnergy(world, pos) * biomeSuitability(world, pos) + (CoordUtils.coordHashCode(pos.up(month), 3) % 4); // Vary the height energy by a psuedorandom hash function
-        }
-
-        private int getRandomNumber (int min, int max) {
-            return new Random().nextInt((max + 1) - min) + min;
         }
 
     }

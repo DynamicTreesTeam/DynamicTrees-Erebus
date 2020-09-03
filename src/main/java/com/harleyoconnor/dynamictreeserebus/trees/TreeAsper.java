@@ -8,6 +8,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.ModContent;
+import com.harleyoconnor.dynamictreeserebus.util.NumberUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
@@ -41,7 +42,7 @@ public class TreeAsper extends TreeFamily {
                 @Override
                 public List<ItemStack> getLogsDrop(World world, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, float volume) {
                     volume *= 6;
-                    dropList.add(new ItemStack(primitiveLog, getRandomNumber(1, (int) (volume <= 1 ? 1 : volume) * 2), 0));
+                    dropList.add(new ItemStack(primitiveLog, NumberUtils.getRandomIntBetween(1, (int) (volume <= 1 ? 1 : volume) * 2), 0));
                     return dropList;
                 }
             });
@@ -65,22 +66,18 @@ public class TreeAsper extends TreeFamily {
         protected int[] customDirectionManipulation(World world, BlockPos pos, int radius, GrowSignal signal, int[] probMap) {
             probMap = super.customDirectionManipulation(world, pos, radius, signal, probMap);
 
-            final int currentHeight = pos.getY() - signal.rootPos.getY();
+            final int signalHeight = (pos.getY() - signal.rootPos.getY()); // Get height of signal.
 
             // Allow growing outwards at height of 3 or rarely at a height of 2.
-            if ((currentHeight == 3 || (currentHeight == 2 && getRandomNumber(1, 100000) == 1)) && signal.isInTrunk())
+            if ((signalHeight == 3 || (signalHeight == 2 && NumberUtils.getRandomIntBetween(1, 100000) == 1)) && signal.isInTrunk())
                 for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] = (int) signal.energy * 2;
             else for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] = 0;
 
             // Disallow growing upwards if the height is greater than 5 or the signal is in a branch.
-            probMap[EnumFacing.UP.getIndex()] = currentHeight > 5 || !signal.isInTrunk() ? 0 : 5;
+            probMap[EnumFacing.UP.getIndex()] = signalHeight > 5 || !signal.isInTrunk() ? 0 : 5;
             probMap[signal.dir.getOpposite().ordinal()] = 0; // Disable the direction we came from.
 
             return probMap;
-        }
-
-        private int getRandomNumber (int min, int max) {
-            return new Random().nextInt((max + 1) - min) + min;
         }
 
     }

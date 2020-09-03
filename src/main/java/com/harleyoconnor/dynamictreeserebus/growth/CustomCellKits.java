@@ -17,6 +17,7 @@ public class CustomCellKits {
         super();
         TreeRegistry.registerCellKit(new ResourceLocation(DynamicTreesErebus.MODID, "asper"), this.asperCellKit);
         TreeRegistry.registerCellKit(new ResourceLocation(DynamicTreesErebus.MODID, "cypress"), this.cypressCellKit);
+        TreeRegistry.registerCellKit(new ResourceLocation(DynamicTreesErebus.MODID, "mossbark"), this.mossbarkCellKit);
     }
 
     private final ICellKit asperCellKit = new ICellKit() {
@@ -143,98 +144,57 @@ public class CustomCellKits {
 
     };
 
-    private final ICellKit conifer = new ICellKit() {
+    // TODO: Make leaves grow down branches properly.
+    private final ICellKit mossbarkCellKit = new ICellKit() {
 
-        private final ICell coniferBranch = new CellConiferBranch();
-        private final ICell coniferTopBranch = new CellConiferTopBranch();
+        private final ICell mossbarkBranch = new ICell() {
+            @Override
+            public int getValue() {
+                return 3;
+            }
 
-        private final ICell coniferLeafCells[] = {
-                CellNull.NULLCELL,
-                new CellConiferLeaf(1),
-                new CellConiferLeaf(2),
-                new CellConiferLeaf(3),
-                new CellConiferLeaf(4)
+            final int map[] = {7, 3, 2, 2, 2, 2};
+
+            @Override
+            public int getValueFromSide(EnumFacing side) {
+                return map[side.ordinal()];
+            }
         };
 
-        private final CellKits.BasicSolver coniferSolver = new CellKits.BasicSolver(new short[]{0x0514, 0x0413, 0x0312, 0x0211});
+        private final ICell mossbarkLeafCells[] = {
+                CellNull.NULLCELL,
+                new CellDarkOakLeaf(1),
+                new CellDarkOakLeaf(2),
+                new CellDarkOakLeaf(3),
+                new CellDarkOakLeaf(4)
+        };
+
+        private final CellKits.BasicSolver mossbarkSolver = new CellKits.BasicSolver(new short[]{0x0513, 0x0412, 0x0311, 0x0211});
 
         @Override
-        public ICell getCellForLeaves(int hydro) {
-            return coniferLeafCells[hydro];
+        public ICell getCellForLeaves(int i) {
+            return this.mossbarkLeafCells[i];
         }
 
         @Override
-        public ICell getCellForBranch(int radius, int meta) {
-            if(meta == CellMetadata.CONIFERTOP) {
-                return coniferTopBranch;
-            }
-            else if(radius == 1) {
-                return coniferBranch;
-            } else {
-                return CellNull.NULLCELL;
-            }
-        }
-
-        @Override
-        public SimpleVoxmap getLeafCluster() {
-            return LeafClusters.conifer;
+        public ICell getCellForBranch(int i, int i1) {
+            return i == 1 ? this.mossbarkBranch : CellNull.NULLCELL;
         }
 
         @Override
         public ICellSolver getCellSolver() {
-            return coniferSolver;
+            return this.mossbarkSolver;
+        }
+
+        @Override
+        public SimpleVoxmap getLeafCluster() {
+            return LeafClusters.darkoak;
         }
 
         @Override
         public int getDefaultHydration() {
             return 4;
         }
-
-    };
-
-    private final ICellKit poplar = new ICellKit() {
-
-        private final ICell normalCells[] = {
-                CellNull.NULLCELL,
-                new CellNormal(1),
-                new CellNormal(2),
-                new CellNormal(3),
-                new CellNormal(4),
-                new CellNormal(5),
-                new CellNormal(6),
-                new CellNormal(7)
-        };
-
-        /** Typical branch with hydration 5 */
-        private final ICell branchCell = new CellNormal(5);
-
-        private final CellKits.BasicSolver deciduousSolver = new CellKits.BasicSolver(new short[]{0x0513, 0x0423, 0x0322, 0x0311, 0x0221});
-
-        @Override
-        public ICell getCellForLeaves(int hydro) {
-            return normalCells[hydro];
-        }
-
-        @Override
-        public ICell getCellForBranch(int radius, int meta) {
-            return radius == 1 ? branchCell : CellNull.NULLCELL;
-        }
-
-        @Override
-        public SimpleVoxmap getLeafCluster() {
-            return LeafClusters.deciduous;
-        }
-
-        @Override
-        public ICellSolver getCellSolver() {
-            return deciduousSolver;
-        }
-
-        @Override
-        public int getDefaultHydration() {
-            return 4;
-        }
-
     };
 
 }
