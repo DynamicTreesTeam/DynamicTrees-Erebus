@@ -9,7 +9,7 @@ import erebus.ModBiomes;
 import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.world.biome.Biome;
 
-public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
+public final class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 
     public static Biome[] erebusBiomes = {
             ModBiomes.ELYSIAN_FIELDS, // Cypress trees spawn here.
