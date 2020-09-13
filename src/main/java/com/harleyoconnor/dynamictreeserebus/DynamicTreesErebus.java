@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid= DynamicTreesErebus.MODID, name= DynamicTreesErebus.NAME, dependencies = DynamicTreesErebus.DEPENDENCIES)
-public class DynamicTreesErebus {
+public final class DynamicTreesErebus {
 	
 	public static final String MODID = "dynamictreeserebus";
 	public static final String NAME = "Dynamic Trees for The Erebus";

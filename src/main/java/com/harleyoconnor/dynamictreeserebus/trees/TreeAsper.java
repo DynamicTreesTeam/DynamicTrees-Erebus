@@ -17,12 +17,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiFunction;
 
-public class TreeAsper extends TreeFamily {
+public final class TreeAsper extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_asper");
     public static final Block primitiveLeaves = Block.getBlockFromName("erebus:leaves_asper");
@@ -46,6 +47,12 @@ public class TreeAsper extends TreeFamily {
                     return dropList;
                 }
             });
+
+            // Set environment factors.
+            this.envFactor(BiomeDictionary.Type.COLD, 0.8F);
+            this.envFactor(BiomeDictionary.Type.DRY, 0.6F);
+            this.envFactor(BiomeDictionary.Type.HOT, 1.3F);
+            this.envFactor(BiomeDictionary.Type.WET, 0.9F);
 
             // Setup seeds.
             this.generateSeed();

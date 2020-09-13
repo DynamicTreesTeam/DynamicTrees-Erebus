@@ -25,5 +25,6 @@ public final class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
     public void populate(BiomeDataBase dbase) {
 
     }
+
 }
 

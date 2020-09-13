@@ -13,10 +13,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.Random;
 
-public class TreeCypress extends TreeFamily {
+public final class TreeCypress extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_cypress");
     public static final Block primitiveLeaves = Block.getBlockFromName("erebus:leaves_cypress");
@@ -28,6 +29,11 @@ public class TreeCypress extends TreeFamily {
 
             // Set growing parameters.
             setBasicGrowingParameters(0.1f, 20.0f, 30, 2, 1.1f);
+
+            // Set environment factors.
+            this.envFactor(BiomeDictionary.Type.HOT, 0.5F);
+            this.envFactor(BiomeDictionary.Type.DRY, 0.25F);
+            this.envFactor(BiomeDictionary.Type.WET, 0.75F);
 
             // Setup seeds.
             this.generateSeed();

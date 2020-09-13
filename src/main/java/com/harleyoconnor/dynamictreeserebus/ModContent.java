@@ -36,7 +36,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = DynamicTreesErebus.MODID)
 @ObjectHolder(DynamicTreesErebus.MODID)
-public class ModContent {
+public final class ModContent {
 
 	public static BlockSurfaceRoot asperRoot;
 
@@ -83,8 +83,7 @@ public class ModContent {
 	}
 
 	public static ILeavesProperties setUpLeaves (Block leavesBlock, String cellKit){
-		ILeavesProperties leavesProperties;
-		leavesProperties = new LeavesProperties(
+		return new LeavesProperties(
 				leavesBlock.getDefaultState(),
 				new ItemStack(leavesBlock, 1, 0),
 				TreeRegistry.findCellKit(cellKit))
@@ -98,10 +97,10 @@ public class ModContent {
 				return 1;
 			}
 		};
-		return leavesProperties;
 	}
 
-	@SubscribeEvent public static void registerItems(RegistryEvent.Register<Item> event) {
+	@SubscribeEvent
+	public static void registerItems(RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> registry = event.getRegistry();
 
 		ArrayList<Item> treeItems = new ArrayList<>();

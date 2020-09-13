@@ -11,7 +11,7 @@ import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
-public class CustomCellKits {
+public final class CustomCellKits {
 
     public CustomCellKits() {
         super();

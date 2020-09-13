@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.BiomeDictionary;
 
-public class TreeMahogany extends TreeFamily {
+public final class TreeMahogany extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_mahogany");
     public static final Block primitiveLeaves = Block.getBlockFromName("erebus:leaves_mahogany");
@@ -28,7 +28,7 @@ public class TreeMahogany extends TreeFamily {
             // Give it the jungle growth logic.
             this.setGrowthLogicKit(TreeRegistry.findGrowthLogicKit("jungle"));
 
-            // Setup environment factors.
+            // Set environment factors.
             this.envFactor(BiomeDictionary.Type.COLD, 0.15F);
             this.envFactor(BiomeDictionary.Type.DRY, 0.2F);
             this.envFactor(BiomeDictionary.Type.HOT, 1.2F);

@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.BiomeDictionary;
 
-public class TreeEucalyptus extends TreeFamily {
+public final class TreeEucalyptus extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_eucalyptus");
     public static final Block primitiveLeaves = Block.getBlockFromName("erebus:leaves_eucalyptus");

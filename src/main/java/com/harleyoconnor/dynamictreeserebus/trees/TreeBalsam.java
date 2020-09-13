@@ -15,11 +15,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.List;
 import java.util.Random;
 
-public class TreeBalsam extends TreeFamily {
+public final class TreeBalsam extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_balsam");
     public static final Block primitiveLogResinless = Block.getBlockFromName("erebus:log_balsam_resinless");
@@ -41,6 +42,12 @@ public class TreeBalsam extends TreeFamily {
                     return dropList;
                 }
             });
+
+            // Set environment factors.
+            this.envFactor(BiomeDictionary.Type.COLD, 0.25F);
+            this.envFactor(BiomeDictionary.Type.NETHER, 0.75F);
+            this.envFactor(BiomeDictionary.Type.WET, 0.75F);
+            this.envFactor(BiomeDictionary.Type.HOT, 1.1F);
 
             // Setup seeds.
             this.generateSeed();

@@ -13,10 +13,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.Random;
 
-public class TreeMossbark extends TreeFamily {
+public final class TreeMossbark extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_mossbark");
     public static final Block primitiveLeaves = Block.getBlockFromName("erebus:leaves_mossbark");
@@ -28,6 +29,12 @@ public class TreeMossbark extends TreeFamily {
 
             // Set growing parameters.
             this.setBasicGrowingParameters(0.3f, 14.0f, 4, 4, 0.9f);
+
+            // Set environment factors.
+            this.envFactor(BiomeDictionary.Type.COLD, 1.2F);
+            this.envFactor(BiomeDictionary.Type.DRY, 0.1F);
+            this.envFactor(BiomeDictionary.Type.HOT, 0.3F);
+            this.envFactor(BiomeDictionary.Type.WET, 1.3F);
 
             // Setup seeds.
             this.generateSeed();
