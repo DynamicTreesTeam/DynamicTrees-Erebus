@@ -1,54 +1,57 @@
 package com.harleyoconnor.dynamictreeserebus.proxy;
 
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
-import com.ferreusveritas.dynamictrees.trees.Species;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.growth.CustomCellKits;
 import erebus.ModBiomes;
 import erebus.blocks.EnumWood;
-import erebus.world.biomes.BiomeUndergroundJungle;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.WorldGenMegaJungle;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import scala.actors.threadpool.Arrays;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class CommonProxy {
 
-	/*private static class BlankWorldGenerator extends WorldGenErebusHugeTree {
-
-		public BlankWorldGenerator(boolean notify, boolean genThorns, EnumWood wood) {
-			super(notify, genThorns, wood);
-		}
-
+	// Blank generator - a generator that will replace regular ones to do nothing when called upon (don't spawn trees).
+	private final WorldGenerator blankGenerator = new WorldGenerator() {
 		@Override
-		public boolean func_180709_b(World world, Random rand, BlockPos pos) {
+		public boolean generate(World worldIn, Random rand, BlockPos position) {
 			return true;
 		}
 
-		@Override
-		public void prepare(int baseHeight) {
+		public boolean func_180709_b(Object world, Object rand, Object pos) {
+			return true;
 		}
 	};
 
-	private final WorldGenerator blankGenerator = new BlankWorldGenerator(true, true, EnumWood.MAHOGANY);
+	private final HashMap<String, WorldGenerator> generatorFields = new HashMap<>();
 
-	private final WorldGenMegaJungle megaJungle = new WorldGenMegaJungle(false, 0, 0, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState()) {
-		@Override
-		public boolean generate(World worldIn, Random rand, BlockPos position) {
-			return super.generate(worldIn, rand, position);
-		}
-	};*/
-	
+	public CommonProxy() {
+		// Add field names and generators.
+		this.generatorFields.put("genTreeMahogany", this.blankGenerator);
+		this.generatorFields.put("genTreeJungle", this.blankGenerator);
+		this.generatorFields.put("genTreeJungleLarge", this.blankGenerator);
+		this.generatorFields.put("genTreeMossbark", this.blankGenerator);
+		this.generatorFields.put("genTreeAsper", this.blankGenerator);
+		this.generatorFields.put("genTreeJungleTall", this.blankGenerator);
+		this.generatorFields.put("genTreeEucalyptus", this.blankGenerator);
+		this.generatorFields.put("genTreeCypress", this.blankGenerator);
+		this.generatorFields.put("genTreeAcacia", this.blankGenerator);
+		this.generatorFields.put("genTreeBalsam", this.blankGenerator);
+	}
+
 	public void preInit() {
 		// Initialise custom cell kits.
 		new CustomCellKits();
@@ -56,37 +59,44 @@ public class CommonProxy {
 	
 	public void init() {
 		// Register sapling replacements.
-		registerSaplingReplacement("asper");
-		registerSaplingReplacement("balsam");
-		registerSaplingReplacement("cypress");
-		registerSaplingReplacement("eucalyptus");
-		registerSaplingReplacement("mahogany");
-		registerSaplingReplacement("mossbark");
+		List<String> saplingNames = Arrays.asList(new String[]{"asper", "balsam", "cypress", "eucalyptus", "mahogany", "mossbark"});
+		saplingNames.forEach(CommonProxy::registerSaplingReplacement);
 
-		/*try {
-			BiomeDecoratorBaseErebus biomeDecorator = null;
-
-			for (final Biome biome : ModBiomes.BIOME_LIST) {
-				if (!(biome instanceof BiomeUndergroundJungle)) continue;
-
-				final Field field = biome.getClass().getSuperclass().getDeclaredField("decorator");
-				field.setAccessible(true);
-				biomeDecorator = (BiomeDecoratorBaseErebus) field.get(biome);
+		// Add blank generator for Erebus huge tree - defining this before init causes crash.
+		this.generatorFields.put("genTreeMahoganyLarge", new WorldGenErebusHugeTree(true, true, EnumWood.MAHOGANY) {
+			@Override
+			public boolean generate(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos position) {
+				return true;
 			}
 
-			if (biomeDecorator != null) {
-				this.setPrivateField(biomeDecorator, "genTreeMahogany", this.blankGenerator);
-				this.setPrivateField(biomeDecorator, "genTreeMahoganyLarge", this.blankGenerator);
-				this.setPrivateField(biomeDecorator, "genTreeJungle", this.blankGenerator);
-				this.setPrivateField(biomeDecorator, "genTreeJungleLarge", this.blankGenerator);
-				this.setPrivateField(biomeDecorator, "genTreeMossbark", this.blankGenerator);
-				this.setPrivateField(biomeDecorator, "genTreeAsper", this.blankGenerator);
-				this.setPrivateField(biomeDecorator, "genTreeJungleTall", this.blankGenerator);
-				this.setPrivateField(biomeDecorator, "genTreeEucalyptus", this.blankGenerator);
+			@Override
+			public void prepare(int baseHeight) {
+			}
+		});
+
+		try {
+			List<BiomeDecoratorBaseErebus> biomeDecorators = new ArrayList<>();
+
+			for (final Biome biome : ModBiomes.BIOME_LIST) {
+				// Get decorator for biome instance.
+				final Field field = biome.getClass().getSuperclass().getDeclaredField("decorator");
+				field.setAccessible(true);
+
+				BiomeDecoratorBaseErebus decorator = (BiomeDecoratorBaseErebus) field.get(biome);
+				biomeDecorators.add(decorator); // Add decorator to list of decorators.
+			}
+
+			for (BiomeDecoratorBaseErebus decorator : biomeDecorators) {
+				for (String fieldName : this.generatorFields.keySet()) {
+					try {
+						// Set field for current tree generator if it exists.
+						this.setPrivateField(decorator, fieldName, this.generatorFields.get(fieldName));
+					} catch (NoSuchFieldException ignored) { }
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 
 	private static void registerSaplingReplacement(final String speciesName) {
