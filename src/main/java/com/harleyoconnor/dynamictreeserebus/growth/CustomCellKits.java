@@ -14,7 +14,6 @@ import net.minecraft.util.ResourceLocation;
 public final class CustomCellKits {
 
     public CustomCellKits() {
-        super();
         TreeRegistry.registerCellKit(new ResourceLocation(DynamicTreesErebus.MODID, "asper"), this.asperCellKit);
         TreeRegistry.registerCellKit(new ResourceLocation(DynamicTreesErebus.MODID, "cypress"), this.cypressCellKit);
         TreeRegistry.registerCellKit(new ResourceLocation(DynamicTreesErebus.MODID, "mossbark"), this.mossbarkCellKit);
@@ -28,7 +27,7 @@ public final class CustomCellKits {
                 return 4;
             }
 
-            final int map[] = {0, 3, 4, 4, 4, 4};
+            final int[] map = {0, 3, 4, 4, 4, 4};
 
             @Override
             public int getValueFromSide(EnumFacing side) {
@@ -36,7 +35,7 @@ public final class CustomCellKits {
             }
         };
 
-        private final ICell asperLeafCells[] = {
+        private final ICell[] asperLeafCells = {
                 CellNull.NULLCELL,
                 new CellDarkOakLeaf(1),
                 new CellDarkOakLeaf(2),
@@ -102,7 +101,7 @@ public final class CustomCellKits {
             }
         };
 
-        private final ICell cypressCells[] = {
+        private final ICell[] cypressCells = {
                 CellNull.NULLCELL,
                 new CellConiferLeaf(1),
                 new CellConiferLeaf(2),
@@ -153,7 +152,7 @@ public final class CustomCellKits {
                 return 3;
             }
 
-            final int map[] = {7, 3, 2, 2, 2, 2};
+            final int[] map = {7, 3, 2, 2, 2, 2};
 
             @Override
             public int getValueFromSide(EnumFacing side) {
@@ -161,7 +160,7 @@ public final class CustomCellKits {
             }
         };
 
-        private final ICell mossbarkLeafCells[] = {
+        private final ICell[] mossbarkLeafCells = {
                 CellNull.NULLCELL,
                 new CellDarkOakLeaf(1),
                 new CellDarkOakLeaf(2),
