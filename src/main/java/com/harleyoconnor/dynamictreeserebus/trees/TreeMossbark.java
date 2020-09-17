@@ -98,11 +98,6 @@ public final class TreeMossbark extends TreeFamily {
     }
 
     @Override
-    public boolean autoCreateBranch() {
-        return true;
-    }
-
-    @Override
     public ItemStack getPrimitiveLogItemStack(int qty) {
         return new ItemStack(primitiveLog, qty, 0);
     }

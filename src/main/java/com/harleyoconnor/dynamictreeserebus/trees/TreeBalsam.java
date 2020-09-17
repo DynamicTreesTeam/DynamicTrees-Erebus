@@ -89,11 +89,6 @@ public final class TreeBalsam extends TreeFamily {
     }
 
     @Override
-    public boolean autoCreateBranch() {
-        return true;
-    }
-
-    @Override
     public ItemStack getPrimitiveLogItemStack(int qty) {
         return new ItemStack(primitiveLogResinless, qty, 0);
     }
