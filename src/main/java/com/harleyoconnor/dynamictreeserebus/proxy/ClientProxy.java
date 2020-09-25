@@ -5,31 +5,29 @@ import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 
+import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * Client proxy, holds client-side only events.
+ *
+ * @author Harley O'Connor
+ */
 @SideOnly(Side.CLIENT)
 public final class ClientProxy extends CommonProxy {
-	
-	@Override
-	public void preInit() {
-		super.preInit();
-	}
-	
+
 	@Override
 	public void init() {
 		super.init();
-		registerColorHandlers();
+
+		this.registerColorHandlers(); // Register colour handlers for client.
 	}
-	
-	@Override public void postInit() {
-		super.postInit();
-	}
-	
+
 	public void registerColorHandlers() {
-		for (BlockDynamicLeaves leaves: LeavesPaging.getLeavesMapForModId(DynamicTreesErebus.MODID).values()) {
+		for (BlockDynamicLeaves leaves: LeavesPaging.getLeavesMapForModId(AddonConstants.MOD_ID).values()) {
 			ModelHelper.regColorHandler(leaves, (state, worldIn, pos, tintIndex) -> {
 				Block block = state.getBlock();
 

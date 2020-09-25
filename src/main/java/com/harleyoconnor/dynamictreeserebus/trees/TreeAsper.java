@@ -6,8 +6,9 @@ import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenRoots;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.harleyoconnor.dynamictreeserebus.AddonConstants;
+import com.harleyoconnor.dynamictreeserebus.AddonContent;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
-import com.harleyoconnor.dynamictreeserebus.ModContent;
 import com.harleyoconnor.dynamictreeserebus.util.NumberUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,6 +24,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiFunction;
 
+/**
+ * Asper tree class.
+ *
+ * @author Harley O'Connor
+ */
 public final class TreeAsper extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_asper");
@@ -33,13 +39,13 @@ public final class TreeAsper extends TreeFamily {
         private final int minTrunkRadiusForRoots = 2;
 
         public SpeciesAsper(TreeFamily treeFamily) {
-            super(treeFamily.getName(), treeFamily, ModContent.asperLeavesProperties);
+            super(treeFamily.getName(), treeFamily, AddonContent.asperLeavesProperties);
 
             // Set growing parameters.
             this.setBasicGrowingParameters(0.6f, 6.0f, 1, 3, 0.6f);
 
             // Add extra Asper logs to drops, otherwise it only drops sticks.
-            this.addDropCreator(new DropCreator(new ResourceLocation(DynamicTreesErebus.MODID, "extraasper")) {
+            this.addDropCreator(new DropCreator(new ResourceLocation(AddonConstants.MOD_ID, "extraasper")) {
                 @Override
                 public List<ItemStack> getLogsDrop(World world, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, float volume) {
                     volume *= 6;
@@ -59,7 +65,7 @@ public final class TreeAsper extends TreeFamily {
             this.setupStandardSeedDropping();
 
             // Add roots generation.
-            addGenFeature(new FeatureGenRoots(this.minTrunkRadiusForRoots).setScaler(getRootScaler()));
+            this.addGenFeature(new FeatureGenRoots(this.minTrunkRadiusForRoots).setScaler(getRootScaler()));
         }
 
         protected BiFunction<Integer, Integer, Integer> getRootScaler() {
@@ -90,12 +96,12 @@ public final class TreeAsper extends TreeFamily {
     }
 
     public TreeAsper() {
-        super(new ResourceLocation(DynamicTreesErebus.MODID, "asper"));
+        super(new ResourceLocation(AddonConstants.MOD_ID, "asper"));
 
         this.setPrimitiveLog(primitiveLog.getDefaultState(), new ItemStack(primitiveLog, 1, 0));
-        ModContent.asperLeavesProperties.setTree(this);
+        AddonContent.asperLeavesProperties.setTree(this);
 
-        ModContent.asperRoot = new BlockSurfaceRoot(Material.WOOD, this.getName() + "root");
+        AddonContent.asperRoot = new BlockSurfaceRoot(Material.WOOD, this.getName() + "root");
 
         this.addConnectableVanillaLeaves(((state) -> state.getBlock() == primitiveLeaves));
     }
@@ -112,12 +118,12 @@ public final class TreeAsper extends TreeFamily {
 
     @Override
     public BlockSurfaceRoot getSurfaceRoots() {
-        return ModContent.asperRoot;
+        return AddonContent.asperRoot;
     }
 
     @Override
     public List<Block> getRegisterableBlocks(List<Block> blockList) {
-        blockList.add(ModContent.asperRoot);
+        blockList.add(AddonContent.asperRoot);
         return super.getRegisterableBlocks(blockList);
     }
 

@@ -4,10 +4,10 @@ import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.harleyoconnor.dynamictreeserebus.AddonConstants;
+import com.harleyoconnor.dynamictreeserebus.AddonContent;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
-import com.harleyoconnor.dynamictreeserebus.ModContent;
 import com.harleyoconnor.dynamictreeserebus.util.NumberUtils;
-import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,6 +20,11 @@ import net.minecraftforge.common.BiomeDictionary;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Balsam tree class.
+ *
+ * @author Harley O'Connor
+ */
 public final class TreeBalsam extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_balsam");
@@ -29,13 +34,13 @@ public final class TreeBalsam extends TreeFamily {
     public static final class SpeciesBalsam extends Species {
 
         public SpeciesBalsam(TreeFamily treeFamily) {
-            super(treeFamily.getName(), treeFamily, ModContent.balsamLeavesProperties);
+            super(treeFamily.getName(), treeFamily, AddonContent.balsamLeavesProperties);
 
             // Set growing parameters.
             this.setBasicGrowingParameters(0.4F, 18.0F, 5, 5, 1.0F);
 
             // Add resin drop creator.
-            this.addDropCreator(new DropCreator(new ResourceLocation(DynamicTreesErebus.MODID, "resin")) {
+            this.addDropCreator(new DropCreator(new ResourceLocation(AddonConstants.MOD_ID, "resin")) {
                 @Override
                 public List<ItemStack> getLogsDrop(World world, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, float volume) {
                     if (volume >= 1) dropList.add(new ItemStack(Item.getByNameOrId("erebus:materials"), NumberUtils.getRandomIntBetween((int) volume, (int) (volume) * 3), 40));
@@ -75,10 +80,10 @@ public final class TreeBalsam extends TreeFamily {
     }
 
     public TreeBalsam() {
-        super(new ResourceLocation(DynamicTreesErebus.MODID, "balsam"));
+        super(new ResourceLocation(AddonConstants.MOD_ID, "balsam"));
 
         this.setPrimitiveLog(primitiveLog.getDefaultState(), new ItemStack(primitiveLog, 1, 0));
-        ModContent.balsamLeavesProperties.setTree(this);
+        AddonContent.balsamLeavesProperties.setTree(this);
 
         this.addConnectableVanillaLeaves(((state) -> state.getBlock() == primitiveLeaves));
     }

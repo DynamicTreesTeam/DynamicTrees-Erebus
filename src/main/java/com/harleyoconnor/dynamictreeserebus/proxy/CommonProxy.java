@@ -2,6 +2,7 @@ package com.harleyoconnor.dynamictreeserebus.proxy;
 
 import com.ferreusveritas.dynamictrees.ModConfigs;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
+import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.growth.CustomCellKits;
 import erebus.ModBiomes;
@@ -23,6 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Common proxy, holds things that are done on both client and server.
+ *
+ * @author Harley O'Connor
+ */
 public class CommonProxy {
 
 	// Blank generator - a generator that will replace regular ones to do nothing when called upon (don't spawn trees).
@@ -46,7 +52,7 @@ public class CommonProxy {
 	
 	public void init() {
 		// Register sapling replacements.
-		List<String> saplingNames = Arrays.asList(new String[]{"asper", "balsam", "cypress", "eucalyptus", "mahogany", "mossbark"});
+		final List<String> saplingNames = Arrays.asList(new String[]{"asper", "balsam", "cypress", "eucalyptus", "mahogany", "mossbark"});
 		saplingNames.forEach(CommonProxy::registerSaplingReplacement);
 
 		// Disable regular tree gen.
@@ -54,7 +60,7 @@ public class CommonProxy {
 	}
 
 	private static void registerSaplingReplacement(final String speciesName) {
-		TreeRegistry.registerSaplingReplacer(Block.getBlockFromName("erebus:sapling_" + speciesName).getDefaultState(), TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesErebus.MODID, speciesName)));
+		TreeRegistry.registerSaplingReplacer(Block.getBlockFromName("erebus:sapling_" + speciesName).getDefaultState(), TreeRegistry.findSpecies(new ResourceLocation(AddonConstants.MOD_ID, speciesName)));
 	}
 
 	private void disableRegularTreeGen () {

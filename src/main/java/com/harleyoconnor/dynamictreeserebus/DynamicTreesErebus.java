@@ -10,18 +10,15 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid= DynamicTreesErebus.MODID, name= DynamicTreesErebus.NAME, dependencies = DynamicTreesErebus.DEPENDENCIES)
+/**
+ * Main mod class.
+ *
+ * @author Harley O'Connor
+ */
+@Mod(modid= AddonConstants.MOD_ID, name= AddonConstants.MOD_NAME, dependencies = AddonConstants.MOD_DEPENDENCIES)
 public final class DynamicTreesErebus {
-	
-	public static final String MODID = "dynamictreeserebus";
-	public static final String NAME = "Dynamic Trees for The Erebus";
-	public static final String DEPENDENCIES = ModConstants.REQAFTER + ModConstants.DYNAMICTREES_LATEST
-			+ ModConstants.NEXT + ModConstants.REQAFTER + "erebus";
-	
-	@Mod.Instance
-	public static DynamicTreesErebus instance;
-	
-	@SidedProxy(clientSide = "com.harleyoconnor.dynamictreeserebus.proxy.ClientProxy", serverSide = "com.harleyoconnor.dynamictreeserebus.proxy.CommonProxy")
+
+	@SidedProxy(clientSide = AddonConstants.PACKAGE_GROUP + ".proxy.ClientProxy", serverSide = AddonConstants.PACKAGE_GROUP + ".proxy.CommonProxy")
 	public static CommonProxy proxy;
 	
 	@EventHandler
@@ -35,7 +32,7 @@ public final class DynamicTreesErebus {
 	}
 	
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit();
 	}
 	

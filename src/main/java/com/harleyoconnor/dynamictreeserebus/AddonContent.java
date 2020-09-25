@@ -34,9 +34,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod.EventBusSubscriber(modid = DynamicTreesErebus.MODID)
-@ObjectHolder(DynamicTreesErebus.MODID)
-public final class ModContent {
+/**
+ * Class to manage addon content.
+ *
+ * @author Harley O'Connor
+ */
+@Mod.EventBusSubscriber(modid = AddonConstants.MOD_ID)
+@ObjectHolder(AddonConstants.MOD_ID)
+public final class AddonContent {
 
 	public static BlockSurfaceRoot asperRoot;
 
@@ -60,12 +65,12 @@ public final class ModContent {
 		eucalyptusLeavesProperties = setUpLeaves(TreeEucalyptus.primitiveLeaves, "acacia");
 		balsamLeavesProperties = setUpLeaves(TreeBalsam.primitiveLeaves, "acacia");
 
-		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 0, asperLeavesProperties);
-		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 1, mossbarkLeavesProperties);
-		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 2, cypressLeavesProperties);
-		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 3, mahoganyLeavesProperties);
-		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 4, eucalyptusLeavesProperties);
-		LeavesPaging.getLeavesBlockForSequence(DynamicTreesErebus.MODID, 5, balsamLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 0, asperLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 1, mossbarkLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 2, cypressLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 3, mahoganyLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 4, eucalyptusLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 5, balsamLeavesProperties);
 
 		TreeFamily asperTree = new TreeAsper();
 		TreeFamily mossbarkTree = new TreeMossbark();
@@ -78,7 +83,7 @@ public final class ModContent {
 		trees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
 		ArrayList<Block> treeBlocks = new ArrayList<>();
 		trees.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
-		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(DynamicTreesErebus.MODID).values());
+		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(AddonConstants.MOD_ID).values());
 		registry.registerAll(treeBlocks.toArray(new Block[treeBlocks.size()]));
 	}
 
@@ -119,7 +124,7 @@ public final class ModContent {
 	}
 
 	public static void setUpSeedRecipes (String name, ItemStack treeSapling){
-		Species treeSpecies = TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesErebus.MODID, name));
+		Species treeSpecies = TreeRegistry.findSpecies(new ResourceLocation(AddonConstants.MOD_ID, name));
 		ItemStack treeSeed = treeSpecies.getSeedStack(1);
 		ItemStack treeTransformationPotion = ModItems.dendroPotion.setTargetTree(new ItemStack(ModItems.dendroPotion, 1, DendroPotionType.TRANSFORM.getIndex()), treeSpecies.getFamily());
 		BrewingRecipeRegistry.addRecipe(new ItemStack(ModItems.dendroPotion, 1, DendroPotionType.TRANSFORM.getIndex()), treeSeed, treeTransformationPotion);
@@ -134,6 +139,6 @@ public final class ModContent {
 			ModelHelper.regModel(tree.getCommonSpecies().getSeed());
 			ModelHelper.regModel(tree);
 		}
-		LeavesPaging.getLeavesMapForModId(DynamicTreesErebus.MODID).forEach((key, leaves) -> ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build()));
+		LeavesPaging.getLeavesMapForModId(AddonConstants.MOD_ID).forEach((key, leaves) -> ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build()));
 	}
 }

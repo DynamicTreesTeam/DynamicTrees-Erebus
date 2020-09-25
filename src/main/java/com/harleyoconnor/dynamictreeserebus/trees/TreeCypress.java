@@ -4,8 +4,9 @@ import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
+import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
-import com.harleyoconnor.dynamictreeserebus.ModContent;
+import com.harleyoconnor.dynamictreeserebus.AddonContent;
 import com.harleyoconnor.dynamictreeserebus.util.NumberUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -15,8 +16,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 
-import java.util.Random;
-
+/**
+ * Cypress tree class.
+ *
+ * @author Harley O'Connor
+ */
 public final class TreeCypress extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_cypress");
@@ -25,7 +29,7 @@ public final class TreeCypress extends TreeFamily {
     public static final class SpeciesCypress extends Species {
 
         public SpeciesCypress(TreeFamily treeFamily) {
-            super(treeFamily.getName(), treeFamily, ModContent.cypressLeavesProperties);
+            super(treeFamily.getName(), treeFamily, AddonContent.cypressLeavesProperties);
 
             // Set growing parameters.
             setBasicGrowingParameters(0.1f, 20.0f, 30, 2, 1.1f);
@@ -72,10 +76,10 @@ public final class TreeCypress extends TreeFamily {
     }
 
     public TreeCypress() {
-        super(new ResourceLocation(DynamicTreesErebus.MODID, "cypress"));
+        super(new ResourceLocation(AddonConstants.MOD_ID, "cypress"));
 
         this.setPrimitiveLog(primitiveLog.getDefaultState(), new ItemStack(primitiveLog, 1, 0));
-        ModContent.cypressLeavesProperties.setTree(this);
+        AddonContent.cypressLeavesProperties.setTree(this);
 
         this.addConnectableVanillaLeaves(((state) -> state.getBlock() == primitiveLeaves));
     }

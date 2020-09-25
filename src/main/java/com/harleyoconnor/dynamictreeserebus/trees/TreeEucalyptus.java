@@ -1,17 +1,20 @@
 package com.harleyoconnor.dynamictreeserebus.trees;
 
-import com.ferreusveritas.dynamictrees.api.TreeRegistry;
-import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenVine;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.harleyoconnor.dynamictreeserebus.AddonConstants;
+import com.harleyoconnor.dynamictreeserebus.AddonContent;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
-import com.harleyoconnor.dynamictreeserebus.ModContent;
-import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.BiomeDictionary;
 
+/**
+ * Eucalyptus tree class.
+ *
+ * @author Harley O'Connor
+ */
 public final class TreeEucalyptus extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_eucalyptus");
@@ -20,7 +23,7 @@ public final class TreeEucalyptus extends TreeFamily {
     public static final class SpeciesEucalyptus extends Species {
 
         public SpeciesEucalyptus(TreeFamily treeFamily) {
-            super(treeFamily.getName(), treeFamily, ModContent.eucalyptusLeavesProperties);
+            super(treeFamily.getName(), treeFamily, AddonContent.eucalyptusLeavesProperties);
 
             // Set growing parameters.
             this.setBasicGrowingParameters(0.15F, 24.0F, 6, 8, 0.7F);
@@ -41,10 +44,10 @@ public final class TreeEucalyptus extends TreeFamily {
     }
 
     public TreeEucalyptus() {
-        super(new ResourceLocation(DynamicTreesErebus.MODID, "eucalyptus"));
+        super(new ResourceLocation(AddonConstants.MOD_ID, "eucalyptus"));
 
         this.setPrimitiveLog(primitiveLog.getDefaultState(), new ItemStack(primitiveLog, 1, 0));
-        ModContent.eucalyptusLeavesProperties.setTree(this);
+        AddonContent.eucalyptusLeavesProperties.setTree(this);
 
         this.addConnectableVanillaLeaves(((state) -> state.getBlock() == primitiveLeaves));
     }

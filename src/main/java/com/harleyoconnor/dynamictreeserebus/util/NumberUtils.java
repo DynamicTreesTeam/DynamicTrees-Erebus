@@ -2,6 +2,11 @@ package com.harleyoconnor.dynamictreeserebus.util;
 
 import java.util.Random;
 
+/**
+ * Common static util methods to handle numbers.
+ *
+ * @author Harley O'Connor
+ */
 public final class NumberUtils {
 
     /** Get Random Integer Between

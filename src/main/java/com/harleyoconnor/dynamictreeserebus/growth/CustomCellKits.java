@@ -7,16 +7,22 @@ import com.ferreusveritas.dynamictrees.api.cells.ICellKit;
 import com.ferreusveritas.dynamictrees.api.cells.ICellSolver;
 import com.ferreusveritas.dynamictrees.cells.*;
 import com.ferreusveritas.dynamictrees.util.SimpleVoxmap;
+import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * Class to hold custom cell kits.
+ *
+ * @author Harley O'Connor
+ */
 public final class CustomCellKits {
 
     public CustomCellKits() {
-        TreeRegistry.registerCellKit(new ResourceLocation(DynamicTreesErebus.MODID, "asper"), this.asperCellKit);
-        TreeRegistry.registerCellKit(new ResourceLocation(DynamicTreesErebus.MODID, "cypress"), this.cypressCellKit);
-        TreeRegistry.registerCellKit(new ResourceLocation(DynamicTreesErebus.MODID, "mossbark"), this.mossbarkCellKit);
+        TreeRegistry.registerCellKit(new ResourceLocation(AddonConstants.MOD_ID, "asper"), this.asperCellKit);
+        TreeRegistry.registerCellKit(new ResourceLocation(AddonConstants.MOD_ID, "cypress"), this.cypressCellKit);
+        TreeRegistry.registerCellKit(new ResourceLocation(AddonConstants.MOD_ID, "mossbark"), this.mossbarkCellKit);
     }
 
     private final ICellKit asperCellKit = new ICellKit() {

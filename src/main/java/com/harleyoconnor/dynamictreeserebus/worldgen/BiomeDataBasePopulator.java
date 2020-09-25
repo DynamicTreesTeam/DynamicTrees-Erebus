@@ -9,6 +9,11 @@ import erebus.ModBiomes;
 import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.world.biome.Biome;
 
+/**
+ * Class to handle dynamic trees biome population.
+ *
+ * @author Harley O'Connor
+ */
 public final class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 
     public static Biome[] erebusBiomes = {

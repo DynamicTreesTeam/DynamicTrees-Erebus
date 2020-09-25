@@ -6,9 +6,9 @@ import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.systems.featuregen.*;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import com.ferreusveritas.dynamictrees.trees.TreeJungle;
+import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
-import com.harleyoconnor.dynamictreeserebus.ModContent;
+import com.harleyoconnor.dynamictreeserebus.AddonContent;
 import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -22,6 +22,11 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.List;
 import java.util.function.BiFunction;
 
+/**
+ * Mahogany tree class.
+ *
+ * @author Harley O'Connor
+ */
 public final class TreeMahogany extends TreeFamily {
 
     public static final Block primitiveLog = Block.getBlockFromName("erebus:log_mahogany");
@@ -30,7 +35,7 @@ public final class TreeMahogany extends TreeFamily {
     public static final class SpeciesMahogany extends Species {
 
         public SpeciesMahogany(TreeFamily treeFamily) {
-            super(treeFamily.getName(), treeFamily, ModContent.mahoganyLeavesProperties);
+            super(treeFamily.getName(), treeFamily, AddonContent.mahoganyLeavesProperties);
 
             // Set growing parameters.
             this.setBasicGrowingParameters(0.25F, 24.0F, 7, 5, 0.9F);
@@ -77,7 +82,7 @@ public final class TreeMahogany extends TreeFamily {
     public static final class SpeciesMegaMahogany extends Species {
 
         public SpeciesMegaMahogany(TreeFamily treeFamily) {
-            super(new ResourceLocation(DynamicTreesErebus.MODID, "mega" + treeFamily.getName().getResourcePath()), treeFamily, ModContent.mahoganyLeavesProperties);
+            super(new ResourceLocation(AddonConstants.MOD_ID, "mega" + treeFamily.getName().getResourcePath()), treeFamily, AddonContent.mahoganyLeavesProperties);
 
             // Set growing parameters.
             this.setBasicGrowingParameters(0.32F, 32.0F, 7, 8, 0.9F);
@@ -145,10 +150,10 @@ public final class TreeMahogany extends TreeFamily {
     BlockSurfaceRoot surfaceRootBlock;
 
     public TreeMahogany() {
-        super(new ResourceLocation(DynamicTreesErebus.MODID, "mahogany"));
+        super(new ResourceLocation(AddonConstants.MOD_ID, "mahogany"));
 
         this.setPrimitiveLog(primitiveLog.getDefaultState(), new ItemStack(primitiveLog, 1, 0));
-        ModContent.mahoganyLeavesProperties.setTree(this);
+        AddonContent.mahoganyLeavesProperties.setTree(this);
 
         // Set surface root.
         surfaceRootBlock = new BlockSurfaceRoot(Material.WOOD, getName() + "root");
