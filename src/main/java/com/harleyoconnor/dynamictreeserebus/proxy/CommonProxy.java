@@ -5,6 +5,7 @@ import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.growth.CustomCellKits;
+import erebus.Erebus;
 import erebus.ModBiomes;
 import erebus.blocks.EnumWood;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
@@ -57,6 +58,9 @@ public class CommonProxy {
 
 		// Disable regular tree gen.
 		if (ModConfigs.worldGen) this.disableRegularTreeGen();
+
+		// Remove Erebus dimension from blacklist.
+		ModConfigs.dimensionBlacklist.remove(Erebus.dimensionType.getId());
 	}
 
 	private static void registerSaplingReplacement(final String speciesName) {

@@ -99,7 +99,7 @@ public final class AddonContent {
 
 			@Override
 			public int getLightRequirement() {
-				return 1;
+				return 0;
 			}
 		};
 	}

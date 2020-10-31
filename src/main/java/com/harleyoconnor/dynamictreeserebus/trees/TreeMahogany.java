@@ -12,6 +12,7 @@ import com.harleyoconnor.dynamictreeserebus.AddonContent;
 import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
