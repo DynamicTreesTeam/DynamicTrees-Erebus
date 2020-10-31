@@ -1,9 +1,12 @@
 package com.harleyoconnor.dynamictreeserebus.trees;
 
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
+import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
+import com.ferreusveritas.dynamictrees.worldgen.JoCode;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.AddonContent;
@@ -43,6 +46,7 @@ public final class TreeCypress extends TreeFamily {
             // Setup seeds.
             this.generateSeed();
             this.setupStandardSeedDropping();
+            addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
         @Override

@@ -1,5 +1,6 @@
 package com.harleyoconnor.dynamictreeserebus.trees;
 
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
@@ -40,6 +41,7 @@ public final class TreeEucalyptus extends TreeFamily {
             // Setup seeds.
             this.generateSeed();
             this.setupStandardSeedDropping();
+            addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
     }

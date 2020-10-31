@@ -1,0 +1,81 @@
+[
+  {
+    "select" : { "name": "erebus:.*" },
+    "apply" : {
+      "cancelvanilla": true,
+      "blacklist": false,
+      "subterranean": true
+    }
+  },
+  {
+    "select" : { "name": "erebus:underground_jungle" },
+    "apply" : {
+      "species" : {
+        "random" : {
+          "dynamictrees:jungle" : 1,
+          "dynamictrees:megajungle" : 1,
+          "dynamictreeserebus:asper" : 1,
+          "dynamictreeserebus:eucalyptus" : 1,
+          "dynamictreeserebus:mossbark" : 1,
+          "dynamictreeserebus:mahogany" : 1,
+          "dynamictreeserebus:megamahogany" : 1
+        }
+      },
+      "density" : [ 0.4 ],
+      "chance" : 0.8
+    }
+  },
+  {
+    "select" : { "name": "erebus:subterranean_savannah" },
+    "apply" : {
+      "species" : {
+        "random" : {
+          "dynamictreeserebus:asper" : 1,
+          "dynamictrees:acacia" : 1
+        }
+      },
+      "density" : [ 0.15 ],
+      "chance" : 0.5
+    }
+  },
+  {
+    "select" : { "name": "erebus:elysian_fields" },
+    "apply" : {
+      "species" : {
+        "random" : {
+          "dynamictreeserebus:cypress" : 1
+        }
+      },
+      "density" : [ 0.2 ],
+      "chance" : 0.3
+    }
+  },
+  {
+    "select" : { "name": "erebus:elysian_forest" },
+    "apply" : {
+      "species" : {
+        "random" : {
+          "dynamictreeserebus:cypress" : 1,
+          "dynamictrees:oak" : 1,
+          "dynamictrees:birch" : 1
+        }
+      },
+      "density" : [ 1 ],
+      "chance" : 1
+    }
+  },
+  {
+    "select" : { "name": "erebus:ulterior_outback" },
+    "apply" : {
+      "species" : {
+        "random" : {
+          "dynamictreeserebus:balsam" : 1,
+          "dynamictreeserebus:eucalyptus" : 1,
+          "dynamictrees:acacia" : 1
+        }
+      },
+      "density" : [ 0.08 ],
+      "chance" : 0.6
+    }
+  }
+]

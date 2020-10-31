@@ -1,6 +1,7 @@
 package com.harleyoconnor.dynamictreeserebus.trees;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
@@ -44,6 +45,7 @@ public final class TreeMossbark extends TreeFamily {
             // Setup seeds.
             this.generateSeed();
             this.setupStandardSeedDropping();
+            addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
         @Override

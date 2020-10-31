@@ -3,6 +3,7 @@ package com.harleyoconnor.dynamictreeserebus.trees;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
 import com.ferreusveritas.dynamictrees.items.Seed;
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import com.ferreusveritas.dynamictrees.systems.featuregen.*;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
@@ -60,6 +61,7 @@ public final class TreeMahogany extends TreeFamily {
             // Add thorns generation.
             this.addGenFeature(new FeatureGenVine().setVineBlock(ModBlocks.THORNS).setQuantity(16).setMaxLength(16));
             this.addGenFeature(new FeatureGenUndergrowth());
+            addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
         @Override
@@ -76,7 +78,6 @@ public final class TreeMahogany extends TreeFamily {
         public Species getMegaSpecies() {
             return ((TreeMahogany) this.treeFamily).megaSpecies;
         }
-
     }
 
     // TODO: Doesn't currently work with gigas potion...?

@@ -1,5 +1,6 @@
 package com.harleyoconnor.dynamictreeserebus.trees;
 
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.trees.Species;
@@ -58,6 +59,7 @@ public final class TreeBalsam extends TreeFamily {
             // Setup seeds.
             this.generateSeed();
             this.setupStandardSeedDropping();
+            addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
         @Override

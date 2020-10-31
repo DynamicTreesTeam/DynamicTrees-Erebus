@@ -1,6 +1,7 @@
 package com.harleyoconnor.dynamictreeserebus.trees;
 
 import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
+import com.ferreusveritas.dynamictrees.systems.DirtHelper;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreator;
 import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenRoots;
@@ -67,11 +68,12 @@ public final class TreeAsper extends TreeFamily {
 
             // Add roots generation.
             this.addGenFeature(new FeatureGenRoots(this.minTrunkRadiusForRoots).setScaler(getRootScaler()));
+            addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
         protected BiFunction<Integer, Integer, Integer> getRootScaler() {
             return (inRadius, trunkRadius) -> {
-                float scale = MathHelper.clamp(trunkRadius >= this.minTrunkRadiusForRoots ? (trunkRadius / 10f) : 0, 0, 1);
+                float scale = MathHelper.clamp(trunkRadius >= this.minTrunkRadiusForRoots ? (trunkRadius / 16f) : 0, 0, 1);
                 return (int) (inRadius * scale);
             };
         }
