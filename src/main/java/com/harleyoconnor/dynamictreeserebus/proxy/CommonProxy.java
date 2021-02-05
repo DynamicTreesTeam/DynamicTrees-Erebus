@@ -3,7 +3,6 @@ package com.harleyoconnor.dynamictreeserebus.proxy;
 import com.ferreusveritas.dynamictrees.ModConfigs;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
-import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.growth.CustomCellKits;
 import erebus.Erebus;
 import erebus.ModBiomes;
@@ -16,14 +15,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import scala.actors.threadpool.Arrays;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Common proxy, holds things that are done on both client and server.
@@ -53,8 +48,7 @@ public class CommonProxy {
 	
 	public void init() {
 		// Register sapling replacements.
-		final List<String> saplingNames = Arrays.asList(new String[]{"asper", "balsam", "cypress", "eucalyptus", "mahogany", "mossbark"});
-		saplingNames.forEach(CommonProxy::registerSaplingReplacement);
+		AddonConstants.EREBUS_TREES.forEach(CommonProxy::registerSaplingReplacement);
 
 		// Disable regular tree gen.
 		if (ModConfigs.worldGen) this.disableRegularTreeGen();
@@ -64,12 +58,12 @@ public class CommonProxy {
 	}
 
 	private static void registerSaplingReplacement(final String speciesName) {
-		TreeRegistry.registerSaplingReplacer(Block.getBlockFromName("erebus:sapling_" + speciesName).getDefaultState(), TreeRegistry.findSpecies(new ResourceLocation(AddonConstants.MOD_ID, speciesName)));
+		TreeRegistry.registerSaplingReplacer(Objects.requireNonNull(Block.getBlockFromName("erebus:sapling_" + speciesName)).getDefaultState(), TreeRegistry.findSpecies(new ResourceLocation(AddonConstants.MOD_ID, speciesName)));
 	}
 
 	private void disableRegularTreeGen () {
 		// Add field names and generators.
-		final List<String> fieldNames = Arrays.asList(new String[]{"genTreeMahogany", "genTreeJungle", "genTreeJungleLarge", "genTreeMossbark", "genTreeAsper", "genTreeJungleTall", "genTreeEucalyptus", "genTreeCypress", "genTreeAcacia", "genTreeBalsam"});
+		final List<String> fieldNames = Arrays.asList("genTreeMahogany", "genTreeJungle", "genTreeJungleLarge", "genTreeMossbark", "genTreeAsper", "genTreeJungleTall", "genTreeEucalyptus", "genTreeCypress", "genTreeAcacia", "genTreeBalsam");
 		fieldNames.forEach(fieldName -> this.generatorFields.put(fieldName, this.blankGenerator));
 
 		// Add blank generator for Erebus huge tree.

@@ -9,11 +9,9 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.AddonContent;
-import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.util.NumberUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -68,7 +66,7 @@ public final class TreeAsper extends TreeFamily {
 
             // Add roots generation.
             this.addGenFeature(new FeatureGenRoots(this.minTrunkRadiusForRoots).setScaler(getRootScaler()));
-            addAcceptableSoils(DirtHelper.MUDLIKE);
+            this.addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
         protected BiFunction<Integer, Integer, Integer> getRootScaler() {

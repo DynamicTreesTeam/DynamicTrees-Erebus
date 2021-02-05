@@ -8,7 +8,6 @@ import com.ferreusveritas.dynamictrees.api.cells.ICellSolver;
 import com.ferreusveritas.dynamictrees.cells.*;
 import com.ferreusveritas.dynamictrees.util.SimpleVoxmap;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
-import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 

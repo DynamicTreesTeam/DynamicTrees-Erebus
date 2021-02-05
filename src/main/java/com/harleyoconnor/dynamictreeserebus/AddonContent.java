@@ -15,12 +15,10 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.harleyoconnor.dynamictreeserebus.trees.*;
 import com.harleyoconnor.dynamictreeserebus.worldgen.BiomeDataBasePopulator;
-import com.harleyoconnor.dynamictreeserebus.worldgen.BiomeDataBasePopulatorOld;
 import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -38,6 +36,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 /**
  * Class to manage addon content.
@@ -52,7 +51,7 @@ public final class AddonContent {
 
 	public static ILeavesProperties asperLeavesProperties, mossbarkLeavesProperties, cypressLeavesProperties, mahoganyLeavesProperties, eucalyptusLeavesProperties, balsamLeavesProperties;
 
-	public static ArrayList<TreeFamily> trees = new ArrayList<TreeFamily>();
+	public static ArrayList<TreeFamily> trees = new ArrayList<>();
 
 	@SubscribeEvent
 	public static void registerDataBasePopulators(final BiomeDataBasePopulatorRegistryEvent event) {
@@ -63,12 +62,12 @@ public final class AddonContent {
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> registry = event.getRegistry();
 
-		asperLeavesProperties = setUpLeaves(TreeAsper.primitiveLeaves, "dynamictreeserebus:asper");
-		mossbarkLeavesProperties = setUpLeaves(TreeMossbark.primitiveLeaves, "dynamictreeserebus:mossbark");
-		cypressLeavesProperties = setUpLeaves(TreeCypress.primitiveLeaves, "dynamictreeserebus:cypress");
-		mahoganyLeavesProperties = setUpLeaves(TreeMahogany.primitiveLeaves, "deciduous");
-		eucalyptusLeavesProperties = setUpLeaves(TreeEucalyptus.primitiveLeaves, "acacia");
-		balsamLeavesProperties = setUpLeaves(TreeBalsam.primitiveLeaves, "acacia");
+		asperLeavesProperties = setUpLeaves(Objects.requireNonNull(TreeAsper.primitiveLeaves), "dynamictreeserebus:asper");
+		mossbarkLeavesProperties = setUpLeaves(Objects.requireNonNull(TreeMossbark.primitiveLeaves), "dynamictreeserebus:mossbark");
+		cypressLeavesProperties = setUpLeaves(Objects.requireNonNull(TreeCypress.primitiveLeaves), "dynamictreeserebus:cypress");
+		mahoganyLeavesProperties = setUpLeaves(Objects.requireNonNull(TreeMahogany.primitiveLeaves), "deciduous");
+		eucalyptusLeavesProperties = setUpLeaves(Objects.requireNonNull(TreeEucalyptus.primitiveLeaves), "acacia");
+		balsamLeavesProperties = setUpLeaves(Objects.requireNonNull(TreeBalsam.primitiveLeaves), "acacia");
 
 		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 0, asperLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 1, mossbarkLeavesProperties);
@@ -77,31 +76,25 @@ public final class AddonContent {
 		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 4, eucalyptusLeavesProperties);
 		LeavesPaging.getLeavesBlockForSequence(AddonConstants.MOD_ID, 5, balsamLeavesProperties);
 
-		TreeFamily asperTree = new TreeAsper();
-		TreeFamily mossbarkTree = new TreeMossbark();
-		TreeFamily cypressTree = new TreeCypress();
-		TreeFamily mahoganyTree = new TreeMahogany();
-		TreeFamily eucalyptusTree = new TreeEucalyptus();
-		TreeFamily balsamTree = new TreeBalsam();
-		Collections.addAll(trees, asperTree, mossbarkTree, cypressTree, mahoganyTree, eucalyptusTree, balsamTree);
+		Collections.addAll(trees, new TreeAsper(), new TreeMossbark(), new TreeCypress(), new TreeMahogany(), new TreeEucalyptus(), new TreeBalsam());
 
 		trees.forEach(tree -> tree.registerSpecies(Species.REGISTRY));
 		ArrayList<Block> treeBlocks = new ArrayList<>();
 		trees.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
 		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(AddonConstants.MOD_ID).values());
-		registry.registerAll(treeBlocks.toArray(new Block[treeBlocks.size()]));
+		registry.registerAll(treeBlocks.toArray(new Block[0]));
 
 		DirtHelper.registerSoil(ModBlocks.MUD, DirtHelper.MUDLIKE);
 	}
 
-	public static ILeavesProperties setUpLeaves (Block leavesBlock, String cellKit){
+	public static ILeavesProperties setUpLeaves (final Block leavesBlock, final String cellKit){
 		return new LeavesProperties(
 				leavesBlock.getDefaultState(),
 				new ItemStack(leavesBlock, 1, 0),
 				TreeRegistry.findCellKit(cellKit))
 		{
 			@Override public ItemStack getPrimitiveLeavesItemStack() {
-				return new ItemStack(leavesBlock, 1, 0);
+				return new ItemStack(leavesBlock);
 			}
 
 			@Override
@@ -112,35 +105,30 @@ public final class AddonContent {
 	}
 
 	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event) {
-		IForgeRegistry<Item> registry = event.getRegistry();
+	public static void registerItems(final RegistryEvent.Register<Item> event) {
+		final IForgeRegistry<Item> registry = event.getRegistry();
 
 		ArrayList<Item> treeItems = new ArrayList<>();
 		trees.forEach(tree -> tree.getRegisterableItems(treeItems));
-		registry.registerAll(treeItems.toArray(new Item[treeItems.size()]));
+		registry.registerAll(treeItems.toArray(new Item[0]));
 	}
 
 	@SubscribeEvent
-	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-		setUpSeedRecipes("asper", new ItemStack(Block.getBlockFromName("erebus:sapling_asper"), 1, 0));
-		setUpSeedRecipes("mossbark", new ItemStack(Block.getBlockFromName("erebus:sapling_mossbark"), 1, 0));
-		setUpSeedRecipes("cypress", new ItemStack(Block.getBlockFromName("erebus:sapling_cypress"), 1, 0));
-		setUpSeedRecipes("mahogany", new ItemStack(Block.getBlockFromName("erebus:sapling_mahogany"), 1, 0));
-		setUpSeedRecipes("eucalyptus", new ItemStack(Block.getBlockFromName("erebus:sapling_eucalyptus"), 1, 0));
-		setUpSeedRecipes("balsam", new ItemStack(Block.getBlockFromName("erebus:sapling_balsam"), 1, 0));
+	public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
+		AddonConstants.EREBUS_TREES.forEach(AddonContent::setUpSeedRecipes);
 	}
 
-	public static void setUpSeedRecipes (String name, ItemStack treeSapling){
+	public static void setUpSeedRecipes(final String name) {
 		Species treeSpecies = TreeRegistry.findSpecies(new ResourceLocation(AddonConstants.MOD_ID, name));
 		ItemStack treeSeed = treeSpecies.getSeedStack(1);
 		ItemStack treeTransformationPotion = ModItems.dendroPotion.setTargetTree(new ItemStack(ModItems.dendroPotion, 1, DendroPotionType.TRANSFORM.getIndex()), treeSpecies.getFamily());
 		BrewingRecipeRegistry.addRecipe(new ItemStack(ModItems.dendroPotion, 1, DendroPotionType.TRANSFORM.getIndex()), treeSeed, treeTransformationPotion);
-		ModRecipes.createDirtBucketExchangeRecipes(treeSapling, treeSeed, true);
+		ModRecipes.createDirtBucketExchangeRecipes(new ItemStack(Objects.requireNonNull(Block.getBlockFromName(AddonConstants.EREBUS_MOD_ID + ":sapling_" + name))), treeSeed, true);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent event) {
+	public static void registerModels(final ModelRegistryEvent event) {
 		for (TreeFamily tree : trees) {
 			ModelHelper.regModel(tree.getDynamicBranch());
 			ModelHelper.regModel(tree.getCommonSpecies().getSeed());

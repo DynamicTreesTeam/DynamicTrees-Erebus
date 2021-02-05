@@ -1,7 +1,5 @@
 package com.harleyoconnor.dynamictreeserebus;
 
-import com.ferreusveritas.dynamictrees.ModConstants;
-
 import com.harleyoconnor.dynamictreeserebus.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;

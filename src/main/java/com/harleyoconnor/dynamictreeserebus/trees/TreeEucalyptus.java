@@ -5,9 +5,7 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.AddonContent;
-import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.BiomeDictionary;
@@ -41,7 +39,7 @@ public final class TreeEucalyptus extends TreeFamily {
             // Setup seeds.
             this.generateSeed();
             this.setupStandardSeedDropping();
-            addAcceptableSoils(DirtHelper.MUDLIKE);
+            this.addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
     }

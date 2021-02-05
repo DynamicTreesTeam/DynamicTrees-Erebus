@@ -4,9 +4,7 @@ import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicLeaves;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
-
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
-import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

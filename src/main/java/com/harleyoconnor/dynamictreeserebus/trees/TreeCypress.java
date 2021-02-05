@@ -5,14 +5,10 @@ import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
-import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
-import com.ferreusveritas.dynamictrees.worldgen.JoCode;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
-import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.AddonContent;
 import com.harleyoconnor.dynamictreeserebus.util.NumberUtils;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -36,7 +32,7 @@ public final class TreeCypress extends TreeFamily {
             super(treeFamily.getName(), treeFamily, AddonContent.cypressLeavesProperties);
 
             // Set growing parameters.
-            setBasicGrowingParameters(0.1f, 20.0f, 30, 2, 1.1f);
+            this.setBasicGrowingParameters(0.1f, 20.0f, 30, 2, 1.1f);
 
             // Set environment factors.
             this.envFactor(BiomeDictionary.Type.HOT, 0.5F);

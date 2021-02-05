@@ -7,10 +7,8 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.AddonContent;
-import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.util.NumberUtils;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -59,7 +57,7 @@ public final class TreeBalsam extends TreeFamily {
             // Setup seeds.
             this.generateSeed();
             this.setupStandardSeedDropping();
-            addAcceptableSoils(DirtHelper.MUDLIKE);
+            this.addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
         @Override

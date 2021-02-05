@@ -7,10 +7,8 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.harleyoconnor.dynamictreeserebus.AddonConstants;
 import com.harleyoconnor.dynamictreeserebus.AddonContent;
-import com.harleyoconnor.dynamictreeserebus.DynamicTreesErebus;
 import com.harleyoconnor.dynamictreeserebus.util.NumberUtils;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -45,14 +43,13 @@ public final class TreeMossbark extends TreeFamily {
             // Setup seeds.
             this.generateSeed();
             this.setupStandardSeedDropping();
-            addAcceptableSoils(DirtHelper.MUDLIKE);
+
+            this.addAcceptableSoils(DirtHelper.MUDLIKE);
         }
 
         @Override
         protected int[] customDirectionManipulation(World world, BlockPos pos, int radius, GrowSignal signal, int[] probMap) {
             for (EnumFacing dir : EnumFacing.VALUES) probMap[dir.getIndex()] = 0; // Reset values.
-
-            // TODO: Find a way to store the height at which it branches off at, potentially using the rooty dirt tile entity.
 
             final int signalHeight = (pos.getY() - signal.rootPos.getY()); // Get height of signal.
 
@@ -60,8 +57,10 @@ public final class TreeMossbark extends TreeFamily {
             if (signalHeight > this.lowestBranchHeight && signal.isInTrunk()) this.incrementHorizontals(probMap, (NumberUtils.getRandomIntBetween(1, 15 / (int) signal.energy) == 1) ? 4 : 0);
 
             // Allow chance of growing outwards once away from the trunk.
-            if (!signal.isInTrunk() && !(world.getBlockState(pos.up()).getBlock() instanceof BlockBranch) && isInHorizontalRange(pos, signal.rootPos, 4))
-                probMap[getRelativeFace(pos, signal.rootPos).getIndex()] = NumberUtils.getRandomIntBetween(1, Math.max((int) Math.ceil(6 / signal.energy), 1)) == 1 ? 6 : 0;
+            if (!signal.isInTrunk() && !(world.getBlockState(pos.up()).getBlock() instanceof BlockBranch) && isInHorizontalRange(pos, signal.rootPos, 4)) {
+                System.out.println(getRelativeFace(pos, signal.rootPos));
+                probMap[getRelativeFace(pos, signal.rootPos).getIndex()] = NumberUtils.getRandomIntBetween(1, Math.max((int) Math.ceil(6 / signal.energy), 1)) == 1 ? 8 : 0;
+            }
 
             probMap[signal.dir.getOpposite().getIndex()] = 0; // Disable the direction we came from.
             probMap[EnumFacing.DOWN.getIndex()] = 0; // Disallow growing downwards.
@@ -71,9 +70,8 @@ public final class TreeMossbark extends TreeFamily {
             return probMap;
         }
 
-        private int[] incrementHorizontals (final int[] probMap, final int amount) {
+        private void incrementHorizontals (final int[] probMap, final int amount) {
             for (EnumFacing dir : EnumFacing.HORIZONTALS) probMap[dir.getIndex()] += amount;
-            return probMap;
         }
 
         private EnumFacing getRelativeFace (final BlockPos signalPos, final BlockPos rootPos) {
