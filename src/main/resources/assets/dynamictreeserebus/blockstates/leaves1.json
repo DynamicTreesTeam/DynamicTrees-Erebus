@@ -9,8 +9,8 @@
 		"tree": {
 			"0": { "textures": { "all": "erebus:blocks/leaves_eucalyptus" } },
 			"1": { "textures": { "all": "erebus:blocks/leaves_balsam" } },
-			"2": {},
-			"3": {}
+			"2": { "textures": { "all": "minecraft:blocks/leaves_oak" } },
+			"3": { "textures": { "all": "minecraft:blocks/leaves_birch" } }
 		},
 		"hydro": {
 			"1": {},

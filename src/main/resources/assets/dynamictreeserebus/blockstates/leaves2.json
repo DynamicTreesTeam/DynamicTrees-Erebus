@@ -1,0 +1,22 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+    	"model": "leaves",
+		"textures": { "all": "blocks/dirt" }
+	},
+	"variants": {
+		"tree": {
+			"0": { "textures": { "all": "minecraft:blocks/leaves_jungle" } },
+			"1": { "textures": { "all": "minecraft:blocks/leaves_acacia" } },
+			"2": {},
+			"3": {}
+		},
+		"hydro": {
+			"1": {},
+			"2": {},
+			"3": {},
+			"4": {}
+		}
+	}
+}
